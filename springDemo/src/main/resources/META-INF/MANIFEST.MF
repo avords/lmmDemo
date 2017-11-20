@@ -1,0 +1,31 @@
+Manifest-Version: 1.0
+Class-Path: lib/zkclient-0.8.jar lib/netty-all-4.0.24.Final.jar lib/fr
+ eemarker-2.3.25-incubating.jar lib/cat-client-1.3.6.lv1.0.jar lib/ezm
+ orph-1.0.6.jar lib/json-lib-2.4-jdk15.jar lib/curator-framework-2.4.2
+ .jar lib/dubbo-2.5.3.lv1.7.1.jar lib/lmm_soa-1.1.3.jar lib/commons
+ -fileupload-1.2.2.jar lib/jackson-databind-2.8.4.jar lib/trace-cat-0.
+ 0.1-20170629.025317-2.jar lib/zookeeper-3.4.6.jar lib/jline-0.9.94.ja
+ r lib/jackson-annotations-2.8.0.jar lib/tools.jar lib/aspectjweaver-1
+ .7.1.jar lib/plexus-utils-3.0.8.jar lib/netty-3.2.5.Final.jar lib/com
+ mons-logging-1.2.jar lib/xbean-reflect-3.7.jar lib/log4j-1.2.17.jar l
+ ib/mysql-connector-java-5.1.26.jar lib/commons-pool2-2.3.jar lib/spri
+ ng-context-support-4.3.3.RELEASE.jar lib/trace-syslog-0.0.1-20170609.
+ 071707-1.jar lib/curator-client-2.4.2.jar lib/lmm-config-1.0.1.jar
+  lib/spring-context-4.3.3.RELEASE.jar lib/spring-expression-4.3.3.REL
+ EASE.jar lib/foundation-service-2.3.0.jar lib/commons-beanutils-1.8.0
+ .jar lib/jackson-core-asl-1.9.13.jar lib/slf4j-log4j12-1.7.21.jar lib
+ /spring-aop-4.3.3.RELEASE.jar lib/commons-collections-3.2.1.jar lib/c
+ urator-recipes-2.4.2.jar lib/commons-lang3-3.1.jar lib/mybatis-3.1.1.
+ jar lib/commons-pool-1.5.4.jar lib/spring-tx-4.3.3.RELEASE.jar lib/je
+ dis-2.8.0.jar lib/jconsole.jar lib/netty-3.7.0.Final.jar lib/spring-b
+ eans-4.3.3.RELEASE.jar lib/fastjson-1.2.20.jar lib/javassist-3.15.0-G
+ A.jar lib/spring-webmvc-4.3.3.RELEASE.jar lib/druid-1.0.18.jar lib/pl
+ exus-classworlds-2.5.1.jar lib/spring-core-4.3.3.RELEASE.jar lib/spri
+ ng-jdbc-4.3.3.RELEASE.jar lib/guava-15.0.jar lib/aspectjrt-1.7.2.jar 
+ lib/jackson-core-2.8.4.jar lib/plexus-container-default-1.6.jar lib/j
+ ackson-mapper-asl-1.9.13.jar lib/gson-1.6.jar lib/spring-web-4.3.3.RE
+ LEASE.jar lib/mybatis-spring-1.2.0.jar lib/ojdbc-6.jar lib/commons-la
+ ng-2.5.jar lib/commons-dbcp-1.4.jar lib/lmm-lang-1.1.0.jar lib/slf
+ 4j-api-1.7.21.jar
+Main-Class: com.lmm.springdemo.Main
+

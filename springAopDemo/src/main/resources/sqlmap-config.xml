@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<typeAliases>
+		<!-- <typeAlias alias="role" type="com.lmmip.back.category.po.Role" 
+			/> -->
+	</typeAliases>
+	<!--配置mybatis拦截器插件 -->
+	<plugins>
+		<!--<plugin interceptor="com.lmmatis.plugin.UpdateInterceptor">
+		</plugin>-->
+		<!-- 产品表及关联表拦截器 -->
+		<plugin interceptor="com.lmm.mvc.demo.noticy.ProdInterceptor">
+	    </plugin>
+	</plugins>
+
+
+</configuration>

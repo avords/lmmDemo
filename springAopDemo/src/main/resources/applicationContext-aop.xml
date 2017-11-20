@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                     http://www.springframework.org/schema/beans/spring-beans.xsd
+                     http://www.springframework.org/schema/aop
+                     http://www.springframework.org/schema/aop/spring-aop.xsd ">
+
+    <aop:aspectj-autoproxy proxy-target-class="true" />
+
+    <bean id="userAop1" class="com.lmm.mvc.demo.aop.UserAop1"/>
+    <bean id="userAop2" class="com.lmm.mvc.demo.aop.UserAop2"/>
+
+    <aop:config proxy-target-class="true">
+        <aop:advisor pointcut="execution(* com..*.service.*+.getUserById(..))" advice-ref="userAop1" order="2" />
+        <aop:advisor pointcut="execution(* com..*.service.*+.getUserById(..))" advice-ref="userAop2" order="1" />
+        <aop:advisor pointcut="execution(* com..*.service.impl.*+.*(..))" advice-ref="txAdvice" order="1"/>
+    </aop:config>
+</beans>

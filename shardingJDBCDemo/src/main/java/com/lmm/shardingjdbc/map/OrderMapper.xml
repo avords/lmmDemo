@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lmm.shardingjdbc.dao.OrderDao">
+  <resultMap id="BaseResultMap" type="com.lmm.shardingjdbc.model.Order">
+    <id column="order_id" jdbcType="DECIMAL" property="orderId" />
+    <result column="user_id" jdbcType="DECIMAL" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_id, user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_order
+    where order_id = #{orderId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_order
+    where order_id = #{orderId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.lmm.shardingjdbc.model.Order">
+    insert into t_order (order_id, user_id)
+    values (#{orderId,jdbcType=DECIMAL}, #{userId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lmm.shardingjdbc.model.Order">
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lmm.shardingjdbc.model.Order">
+    update t_order
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lmm.shardingjdbc.model.Order">
+    update t_order
+    set user_id = #{userId,jdbcType=DECIMAL}
+    where order_id = #{orderId,jdbcType=DECIMAL}
+  </update>
+</mapper>

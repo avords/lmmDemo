@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- 线程池配置 -->
+	<bean id="daoThreadPool" class="java.util.concurrent.ThreadPoolExecutor" >
+		<constructor-arg index="0" value="4"></constructor-arg>
+		<constructor-arg index="1" value="200"></constructor-arg>
+		<constructor-arg index="2" value="120"></constructor-arg>
+		<constructor-arg index="3" type="java.util.concurrent.TimeUnit" value="MINUTES"></constructor-arg>
+		<constructor-arg index="4">
+			<bean class="java.util.concurrent.LinkedBlockingQueue">
+				<constructor-arg index="0" value="30"></constructor-arg>
+			</bean>
+		</constructor-arg>
+	</bean>
+
+</beans>

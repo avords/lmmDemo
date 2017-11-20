@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+http://www.springframework.org/schema/tx 
+http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <!--主 数据源 -->
+    <bean id="sharding_0" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+          destroy-method="close">
+        <!-- 数据库驱动 -->
+        <property name="driverClassName" value="${mysql0.jdbc.driverClassName}" />
+        <!-- 基本属性 url、user、password -->
+        <property name="url" value="${mysql0.jdbc.url}" />
+        <property name="username" value="${mysql0.jdbc.username}" />
+        <property name="password" value="${mysql0.jdbc.password}" />
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="${mysql0.jdbc.initSize}" />
+        <property name="minIdle" value="${mysql0.jdbc.maxIdle}" />
+        <property name="maxActive" value="${mysql0.jdbc.maxActive}" />
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="${mysql0.jdbc.maxWait}" />
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="20000" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="30000" />
+        <!-- mysql中使用 -->
+        <property name="validationQuery" value="SELECT 1" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+        <!-- 超过时间限制是否回收 -->
+        <property name="removeAbandoned" value="true" />
+        <property name="connectionProperties" value = "clientEncoding=UTF-8;serverEncoding=GBK;"/>
+        <!-- PSCache对支持游标的数据库性能提升巨大 -->
+        <property name="poolPreparedStatements" value="false" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+        <!-- 配置监控统计拦截的filters -->
+        <property name="filters" value="mergeStat" />
+    </bean>
+    <bean id="sharding_1" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+          destroy-method="close">
+        <!-- 数据库驱动 -->
+        <property name="driverClassName" value="${mysql1.jdbc.driverClassName}" />
+        <!-- 基本属性 url、user、password -->
+        <property name="url" value="${mysql1.jdbc.url}" />
+        <property name="username" value="${mysql1.jdbc.username}" />
+        <property name="password" value="${mysql1.jdbc.password}" />
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="${mysql1.jdbc.initSize}" />
+        <property name="minIdle" value="${mysql1.jdbc.maxIdle}" />
+        <property name="maxActive" value="${mysql1.jdbc.maxActive}" />
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="${mysql1.jdbc.maxWait}" />
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="20000" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="30000" />
+        <!-- mysql中使用 -->
+        <property name="validationQuery" value="SELECT 1" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+        <!-- 超过时间限制是否回收 -->
+        <property name="removeAbandoned" value="true" />
+        <property name="connectionProperties" value = "clientEncoding=UTF-8;serverEncoding=GBK;"/>
+        <!-- PSCache对支持游标的数据库性能提升巨大 -->
+        <property name="poolPreparedStatements" value="false" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+        <!-- 配置监控统计拦截的filters -->
+        <property name="filters" value="mergeStat" />
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="shardingDataSource" />
+        <property name="configLocation" value="classpath:sqlmap-config.xml" />
+        <property name="mapperLocations">
+            <value>classpath*:com/lmm/**/map/*.xml</value>
+        </property>
+        <!-- <property name="plugins"> <list> <value>com.lmmt.comm.mybatis.PaginationInterceptor</value> 
+            </list> </property> -->
+    </bean>
+
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory" />
+    </bean>
+    <!--支持spring扫描mybatis自动建bean-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.lmm.**.dao" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+    
+</beans>

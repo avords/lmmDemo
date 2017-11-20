@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+http://www.springframework.org/schema/tx 
+http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+    <!-- Transaction manager for a single JDBC DataSource -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="shardingDataSource" />
+    </bean>
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!--read-only保证数据读取的一致性，从这一点设置的时间点
+            开始（时间点a）到这个事务结束的过程中，其他事务所提交的数据，
+            该事务将看不见！（查询中不会出现别人在时间点a之后提交的数据）-->
+            <tx:method name="get*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="search*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="find*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="save*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="update*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="create*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="delete*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="run*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="batch*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="execute*" propagation="REQUIRED" rollback-for="Throwable"/>
+           <!-- <tx:method name="*" propagation="REQUIRED"/>-->
+        </tx:attributes>
+    </tx:advice>
+    <!-- proxy-target-class:true（cglib.jar）,false or ignore(JDK)-->
+    <!-- BaseSerice manage transaction, sub class don't need configuration -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+    
+</beans>

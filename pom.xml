@@ -50,6 +50,7 @@
         <module>springDemo</module>
         <module>shardingJDBCDemo</module>
         <module>mybatisgGnerator</module>
+        <module>springBootDemo</module>
     </modules>
          <!--编译插件配置-->
     <build>

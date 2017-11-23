@@ -1,5 +1,6 @@
 package com.lmm.mvc.controller;
 
+import com.lmm.boot.StartDemoProperties;
 import com.lmm.mvc.service.TestService;
 import com.lmm.mvc.util.SpringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SampleController {
     @Autowired
     private TestService testService;
+    @Autowired
+    private StartDemoProperties startDemoProperties;
     @RequestMapping("/")
     @ResponseBody
     public String home() {
@@ -32,6 +35,13 @@ public class SampleController {
             flag = true;
         }
         return flag;
+    }
+    @RequestMapping("/test")
+    @ResponseBody
+    public String test(){
+        String a = startDemoProperties.getA();
+        String b = startDemoProperties.getB();
+        return "a:"+a+",b:"+b;
     }
     public static void main(String[] args) throws Exception {
         SpringApplication.run(SampleController.class, args);

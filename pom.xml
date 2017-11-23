@@ -51,6 +51,7 @@
         <module>shardingJDBCDemo</module>
         <module>mybatisgGnerator</module>
         <module>springBootDemo</module>
+        <module>springBootStartDemo</module>
     </modules>
          <!--编译插件配置-->
     <build>

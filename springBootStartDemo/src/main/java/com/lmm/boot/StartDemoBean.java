@@ -1,9 +1,12 @@
 package com.lmm.boot;
 
+import org.springframework.beans.factory.annotation.Value;
+
 /**
  * Created by Administrator on 2017/11/23.
  */
 public class StartDemoBean {
+    @Value("${start.demo.school:北方民资大学}")
     private String school;
     private int age;
     private String id;

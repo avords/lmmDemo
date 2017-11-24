@@ -51,6 +51,7 @@ public class SampleController {
     @RequestMapping("/startBean")
     @ResponseBody
     public StartDemoBean getStartDemoBean(){
+        startDemoBean.setAge(256);
         return startDemoBean;
     }
     public static void main(String[] args) throws Exception {

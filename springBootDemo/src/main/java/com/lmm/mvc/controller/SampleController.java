@@ -45,6 +45,7 @@ public class SampleController {
     public String test(){
         String a = startDemoProperties.getA();
         String b = startDemoProperties.getB();
+        long x = 0x7fffffffffffffffL;
         return "a:"+a+",b:"+b;
     }
     

@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Administrator on 2016/11/25.
  */
@@ -32,5 +35,13 @@ public class ProductController {
     public Integer getProduct(String productName,Long productId){
         int i =  productService.updateNameByProductId(productName,productId);
         return i;
+    }
+    @RequestMapping("/getProducts")
+    @ResponseBody
+    public List<ProdProduct> getProducts(){
+        List<Long> list = new ArrayList<>();
+        list.add(98862L);
+        list.add(98863L);
+        return productService.findProductsByIds(list);
     }
 }

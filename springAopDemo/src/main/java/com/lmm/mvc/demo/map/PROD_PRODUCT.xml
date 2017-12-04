@@ -45,13 +45,4 @@
     <update id="updateNameByProductId" parameterType="java.util.Map">
         UPDATE prod_product set product_name=#{productName} where product_id=#{productId}
     </update>
-  <select id="findProductsByIds" parameterType="java.util.Map" resultMap="BaseResultMap">
-    select * from prod_product where 1=1
-    <if test="productIds!=null and productIds.size>0">
-      and product_id in
-      <foreach item="productId" collection="productIds" open="(" separator="," close=")">
-        #{productId}
-      </foreach>
-    </if>
-  </select>
 </mapper>

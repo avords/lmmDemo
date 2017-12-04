@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,10 +32,5 @@ public class ProductServiceImpl implements ProductService{
         map.put("productName",productName);
         map.put("productId",productId);
         return productDao.updateNameByProductId(map);
-    }
-
-    @Override
-    public List<ProdProduct> findProductsByIds(List<Long> productIds) {
-        return productDao.findProductsByIds(productIds);
     }
 }

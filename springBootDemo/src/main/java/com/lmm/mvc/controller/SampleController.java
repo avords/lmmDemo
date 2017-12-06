@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * Created by Administrator on 2017/11/22.
  */
-@SpringBootApplication(scanBasePackages = {"com.lmm.mvc"})
+@SpringBootApplication(scanBasePackages = {"com.lmm"})
 @Controller
 public class SampleController {
     @Autowired

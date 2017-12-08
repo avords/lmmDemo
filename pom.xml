@@ -52,7 +52,6 @@
         <module>mybatisgGnerator</module>
         <module>springBootDemo</module>
         <module>springBootStartDemo</module>
-        <module>springbootstarterrocketmq</module>
         <module>springBootStarterRocketmq</module>
     </modules>
          <!--编译插件配置-->

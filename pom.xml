@@ -53,6 +53,7 @@
         <module>springBootDemo</module>
         <module>springBootStartDemo</module>
         <module>springBootStarterRocketmq</module>
+        <module>jettyDemo</module>
     </modules>
          <!--编译插件配置-->
     <build>

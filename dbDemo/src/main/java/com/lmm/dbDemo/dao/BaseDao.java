@@ -7,6 +7,7 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.util.List;
 import java.util.Map;
@@ -43,5 +44,12 @@ public class BaseDao {
         QueryRunner queryRunner = new QueryRunner();
         int count = queryRunner.update(ConnectionUtils.getConnection(),sql, params);
         return count>0;
+    }
+
+    public boolean insert(String sql) throws Exception{
+        QueryRunner queryRunner = new QueryRunner();
+        ResultSetHandler<Long> rsh = new ScalarHandler<Long>();
+        Long i = queryRunner.insert(ConnectionUtils.getConnection(),sql, rsh);
+        return i>0;
     }
 }

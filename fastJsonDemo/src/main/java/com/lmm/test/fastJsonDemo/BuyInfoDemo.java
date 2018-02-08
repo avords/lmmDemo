@@ -1,6 +1,7 @@
 package com.lmm.test.fastJsonDemo;
 
 import com.lmm.test.fastJsonDemo.vo1.BuyInfo;
+import com.lmm.test.fastJsonDemo.vo1.Schoole;
 
 import java.util.ArrayList;
 import java.util.List;

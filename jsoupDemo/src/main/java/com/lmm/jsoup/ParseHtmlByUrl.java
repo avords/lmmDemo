@@ -9,7 +9,7 @@ import org.jsoup.nodes.Element;
  */
 public class ParseHtmlByUrl {
     public static void main(String[] args) throws Exception {
-        Document doc = Jsoup.connect("http://www.lmm.com").get();
+        Document doc = Jsoup.connect("http://www.lvmama.com").get();
         System.out.println(doc.body());
         Element element = doc.select("#currentCity").first();
         String text = element.text();

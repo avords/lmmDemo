@@ -13,11 +13,11 @@ public class MyZkTest {
                     DistributedLock dt = new DistributedLock("10.112.4.47:2181","myzktest");
                     dt.lock();
                     System.out.println("my "+j+" doing");
-                    /*try {
-                       // Thread.sleep(1000);
+                    try {
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
-                    }*/
+                    }
                     dt.unlock();
                 }
             };

@@ -72,7 +72,6 @@ public class DistributedLock implements Lock, Watcher {
         try {
             if(this.tryLock()){
                 System.out.println("Thread " + Thread.currentThread().getId() + " " +myZnode + " get lock true");
-                Thread.sleep(2000);
                 return;
             }
             else{

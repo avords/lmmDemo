@@ -10,7 +10,7 @@ public class MyZkTest {
             Runnable task1 = new Runnable(){
                 @Override
                 public void run() {
-                    DistributedLock dt = new DistributedLock("10.113.10.190:2181,10.113.10.191:2182,10.113.10.192:2183","myzktest");
+                    DistributedLock dt = new DistributedLock("10.112.4.47:2181","myzktest");
                     dt.lock();
                     System.out.println("my "+j+" doing");
                     /*try {

@@ -39,7 +39,9 @@ public class DistributedLock implements Lock, Watcher {
         this.lockName = lockName;
         // 创建一个与服务器的连接
         try {
+            this.latch = new CountDownLatch(1);
             zk = new ZooKeeper(config, sessionTimeout, this);
+            this.latch.await();
             Stat stat = zk.exists(root, false);
             if(stat == null){
                 // 创建根节点
@@ -70,6 +72,7 @@ public class DistributedLock implements Lock, Watcher {
         try {
             if(this.tryLock()){
                 System.out.println("Thread " + Thread.currentThread().getId() + " " +myZnode + " get lock true");
+                Thread.sleep(2000);
                 return;
             }
             else{

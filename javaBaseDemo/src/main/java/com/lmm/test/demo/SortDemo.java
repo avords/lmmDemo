@@ -84,5 +84,7 @@ public class SortDemo {
         //bubbleSort(a);
         fastSort(a, 0, a.length - 1);
         System.out.println(Arrays.toString(a));
+        System.out.println(a.getClass().isArray());
+        System.out.println(a instanceof int[]);
     }
 }

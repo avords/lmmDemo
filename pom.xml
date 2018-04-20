@@ -55,6 +55,7 @@
         <module>springBootStarterRocketmq</module>
         <module>jettyDemo</module>
         <module>springBootSecurityDemo</module>
+        <module>jdk8Demo</module>
     </modules>
          <!--编译插件配置-->
     <build>

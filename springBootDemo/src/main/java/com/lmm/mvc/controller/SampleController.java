@@ -7,6 +7,7 @@ import com.lmm.mvc.util.SpringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * Created by Administrator on 2017/11/22.
  */
+@EnableElasticsearchRepositories(basePackages = "com.lmm")
 @SpringBootApplication(scanBasePackages = {"com.lmm"})
 @Controller
 public class SampleController {

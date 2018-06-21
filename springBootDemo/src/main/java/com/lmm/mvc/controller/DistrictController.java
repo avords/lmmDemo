@@ -7,14 +7,19 @@ import com.lmm.data.City;
 import com.lmm.data.CityRepository;
 import com.lmm.data.Province;
 import com.lmm.data.ProvinceRepository;
+import com.lmm.mvc.vo.SearchVo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/district")
@@ -72,5 +77,25 @@ public class DistrictController {
             e.printStackTrace();
         }
         return "";
+    }
+
+    @RequestMapping("/test")
+    public Map test(SearchVo vo,
+                    @RequestParam Integer pageNum,
+                    @RequestParam Integer pageSize,
+                    @RequestParam double amount){
+        
+        Map<String,Object> map = new HashMap<>();
+        
+        map.put("searchVo", vo);
+        map.put("pageSize", pageSize);
+        map.put("pageNum", pageNum);
+        map.put("amount", amount);
+        return map;
+    }
+
+    public static void main(String[] args) {
+        String str = "afdsfdsf";
+        System.out.println(Arrays.toString(str.split(";")));
     }
 }

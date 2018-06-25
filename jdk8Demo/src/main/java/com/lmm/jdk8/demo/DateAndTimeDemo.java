@@ -1,13 +1,12 @@
 package com.lmm.jdk8.demo;
 
-import java.time.Clock;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class DateAndTimeDemo {
     public static void main(String[] args) {
-        final Clock clock = Clock.systemUTC();
+        /*final Clock clock = Clock.systemUTC();
         System.out.println( clock.instant() );
         System.out.println( clock.millis() );
 
@@ -30,6 +29,17 @@ public class DateAndTimeDemo {
         final LocalDateTime datetimeFromClock = LocalDateTime.now( clock );
 
         System.out.println( datetime );
-        System.out.println( datetimeFromClock );
+        System.out.println( datetimeFromClock );*/
+
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(new Date().toInstant(), ZoneId.systemDefault());
+
+        System.out.println(localDateTime);
+
+        LocalDateTime localDateTime1 = LocalDateTime.ofInstant(new Date().toInstant(), ZoneId.of("Asia/Kolkata"));
+
+        System.out.println(localDateTime1);
+
+
+        System.out.println(new Date().toInstant());
     }
 }

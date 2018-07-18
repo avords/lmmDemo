@@ -57,6 +57,7 @@
         <module>springBootSecurityDemo</module>
         <module>jdk8Demo</module>
         <module>utilsDemo</module>
+        <module>hystrixDemo</module>
     </modules>
          <!--编译插件配置-->
     <build>

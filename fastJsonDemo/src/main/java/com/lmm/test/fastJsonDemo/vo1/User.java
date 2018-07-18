@@ -7,7 +7,6 @@ import java.util.List;
  * Created by Administrator on 2016/11/9.
  */
 public class User {
-    private static final int aa=12;
     private String name;
     private int age;
     private Date birthday;

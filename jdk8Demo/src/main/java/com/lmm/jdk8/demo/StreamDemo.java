@@ -18,6 +18,8 @@ public class StreamDemo {
             return new User(st);
         }).collect(Collectors.toList());
 
+        String[] arrys =  Arrays.asList("tom","alice","zhangwei","tom","alice").stream().toArray(String[]::new);
+        
         System.out.println(userList);
 
         Map<String,String> map1 = Arrays.asList("tom","alice","zhangwei")

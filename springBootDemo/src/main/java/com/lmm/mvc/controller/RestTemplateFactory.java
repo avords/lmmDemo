@@ -72,8 +72,8 @@ public class RestTemplateFactory {
 
             PoolingHttpClientConnectionManager poolingHttpClientConnectionManager = new PoolingHttpClientConnectionManager(
                     socketFactoryRegistry);
-            poolingHttpClientConnectionManager.setMaxTotal(2700); // 最大连接数2700
-            poolingHttpClientConnectionManager.setDefaultMaxPerRoute(100); // 同路由并发数100，就是到每个站点保持的连接数
+            poolingHttpClientConnectionManager.setMaxTotal(200); // 最大连接数2700
+            poolingHttpClientConnectionManager.setDefaultMaxPerRoute(20); // 同路由并发数100，就是到每个站点保持的连接数
 
             RestTemplateFactory.thread=new HttpClientConnectionMonitorThread(poolingHttpClientConnectionManager); //管理 http连接池
             
@@ -82,8 +82,8 @@ public class RestTemplateFactory {
 
             //connectionRequestTimeout：连接不够用的等待时间，connectTimeout：连接超时时间，socketTimeout：读取数据超时时间
             RequestConfig requestConfig = RequestConfig.custom()
-                    .setConnectTimeout(20000).setConnectionRequestTimeout(20000)
-                    .setSocketTimeout(30000).build();
+                    .setConnectTimeout(5000).setConnectionRequestTimeout(2000)
+                    .setSocketTimeout(10000).build();
             
             httpClientBuilder.setDefaultRequestConfig(requestConfig);
             HttpClient httpClient = httpClientBuilder.build();

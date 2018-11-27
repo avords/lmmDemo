@@ -1,4 +1,4 @@
-package com.lmm.disruptorDemo;
+package com.lmm.disruptorDemo.utils;
 
 import com.lmax.disruptor.EventFactory;
 import com.lmax.disruptor.EventHandler;
@@ -9,19 +9,19 @@ import com.lmax.disruptor.dsl.ProducerType;
 import com.lmm.disruptorDemo.even.LongEvent;
 import com.lmm.disruptorDemo.evenhandler.LongEventHandler;
 import com.lmm.disruptorDemo.factory.LongEventFactory;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import com.lmm.disruptorDemo.factory.MyThreadFactory;
 
 /**
  * Created by arno.yan on 2018/11/27.
  */
-public class DisruptorDemo {
+public class DisruptorUtil {
 
+    private static Disruptor disruptor;
+    
     public static void main(String[] args) {
 
         //启动
-        Disruptor disruptor = strat();
+        Disruptor disruptor = start();
 
         //发布事件；
         for(long i=0;i<200;i++){
@@ -32,13 +32,13 @@ public class DisruptorDemo {
         //executor.shutdown();//关闭 disruptor 使用的线程池；如果需要的话，必须手动关闭， disruptor 在 shutdown 时不会自动关闭；
     }
 
-    public static Disruptor strat() {
+    private static Disruptor start() {
         EventFactory<LongEvent> eventFactory = new LongEventFactory();
-        ExecutorService executor = Executors.newSingleThreadExecutor();
         int ringBufferSize = 1024 * 1024; // RingBuffer 大小，必须是 2 的 N 次方；
 
-        Disruptor<LongEvent> disruptor = new Disruptor<LongEvent>(eventFactory,
-                ringBufferSize, executor, ProducerType.SINGLE,
+        
+        Disruptor<LongEvent> disruptor = new Disruptor<>(eventFactory,
+                ringBufferSize, new MyThreadFactory(), ProducerType.SINGLE,
                 new YieldingWaitStrategy());
 
         EventHandler<LongEvent> eventHandler = new LongEventHandler();
@@ -60,5 +60,17 @@ public class DisruptorDemo {
         } finally {
             ringBuffer.publish(sequence);//发布事件；
         }
+    }
+    
+    public static Disruptor getDisruptor(){
+        if(disruptor == null){
+            synchronized (DisruptorUtil.class){
+                if(disruptor == null){
+                    disruptor = start();
+                }
+            }
+        }
+        
+        return disruptor;
     }
 }

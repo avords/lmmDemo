@@ -1,4 +1,6 @@
-package com.lmm.jdk8.demo;
+package com.lmm.test.fastJsonDemo;
+
+import com.alibaba.fastjson.JSON;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,7 @@ public class Test {
             list = list.subList(0,2);
             list.add(3);
             list.add(4);
-            System.out.println("第"+i+"次"+list);
+            System.out.println("第"+i+"次"+ JSON.toJSONString(list));
         }
     }
 }

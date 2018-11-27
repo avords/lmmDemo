@@ -58,6 +58,7 @@
         <module>jdk8Demo</module>
         <module>utilsDemo</module>
         <module>hystrixDemo</module>
+        <module>disruptorDemo</module>
     </modules>
          <!--编译插件配置-->
     <build>

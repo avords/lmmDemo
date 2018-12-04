@@ -1,7 +1,6 @@
 package com.lmm.jdk8.demo;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Created by arno.yan on 2018/11/6.
@@ -9,19 +8,10 @@ import java.util.List;
 public class Test {
 
     public static void main(String[] args) {
-        List<Integer> list = new ArrayList<>();
-        
-        for(int i=0;i<20;i++){
-            list.add(i);
-        }
-        
-        int i=0;
-        while (true){
-            i++;
-            list = list.subList(0,2);
-            list.add(3);
-            list.add(4);
-            System.out.println("第"+i+"次"+list);
+        String sql = "CREATE UNIQUE INDEX UNIQUE_STATUS_ID ON XIMA_IVC.IVC_INVOICEABLE_ORDER_%s (STATUS_ID);";
+
+        for (int i = 0; i < 100; i++) {
+            System.out.println(String.format(sql, StringUtils.leftPad(String.valueOf(i), 2, '0')));
         }
     }
 }

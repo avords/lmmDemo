@@ -12,15 +12,15 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 http://www.springframework.org/schema/tx 
 http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
     <!-- Transaction manager for a single JDBC DataSource -->
-    <bean id="transactionManager"
+    <!--<bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="defaultDataSource" />
     </bean>
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <!--read-only保证数据读取的一致性，从这一点设置的时间点
+            &lt;!&ndash;read-only保证数据读取的一致性，从这一点设置的时间点
             开始（时间点a）到这个事务结束的过程中，其他事务所提交的数据，
-            该事务将看不见！（查询中不会出现别人在时间点a之后提交的数据）-->
+            该事务将看不见！（查询中不会出现别人在时间点a之后提交的数据）&ndash;&gt;
             <tx:method name="get*" propagation="REQUIRED" read-only="true"/>
             <tx:method name="search*" propagation="REQUIRED" read-only="true"/>
             <tx:method name="find*" propagation="REQUIRED" read-only="true"/>
@@ -31,11 +31,11 @@ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
             <tx:method name="run*" propagation="REQUIRED" rollback-for="Throwable"/>
             <tx:method name="batch*" propagation="REQUIRED" rollback-for="Throwable"/>
             <tx:method name="execute*" propagation="REQUIRED" rollback-for="Throwable"/>
-           <!-- <tx:method name="*" propagation="REQUIRED"/>-->
+           &lt;!&ndash; <tx:method name="*" propagation="REQUIRED"/>&ndash;&gt;
         </tx:attributes>
     </tx:advice>
-    <!-- proxy-target-class:true（cglib.jar）,false or ignore(JDK)-->
-    <!-- BaseSerice manage transaction, sub class don't need configuration -->
-    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+    &lt;!&ndash; proxy-target-class:true（cglib.jar）,false or ignore(JDK)&ndash;&gt;
+    &lt;!&ndash; BaseSerice manage transaction, sub class don't need configuration &ndash;&gt;
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>-->
     
 </beans>

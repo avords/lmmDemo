@@ -9,11 +9,12 @@
     <aop:aspectj-autoproxy proxy-target-class="true" />
 
     <bean id="userAop1" class="com.lmm.mvc.demo.aop.UserAop1"/>
-    <bean id="userAop2" class="com.lmm.mvc.demo.aop.UserAop2"/>
 
     <aop:config proxy-target-class="true">
-        <aop:advisor pointcut="execution(* com..*.service.*+.getUserById(..))" advice-ref="userAop1" order="2" />
-        <aop:advisor pointcut="execution(* com..*.service.*+.getUserById(..))" advice-ref="userAop2" order="1" />
-        <aop:advisor pointcut="execution(* com..*.service.impl.*+.*(..))" advice-ref="txAdvice" order="1"/>
+<!--
+        <aop:advisor pointcut="execution(* com.lmm..AopService.*(..))" advice-ref="userAop1"/>
+-->
+        <aop:advisor pointcut="execution(* com.lmm..AbstractService.*(..))" advice-ref="userAop1"/>
+
     </aop:config>
 </beans>

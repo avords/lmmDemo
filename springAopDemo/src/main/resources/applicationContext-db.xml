@@ -57,40 +57,40 @@ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
     </bean>-->
 
     <!--主 数据源 -->
-    <bean id="defaultDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+   <!-- <bean id="defaultDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
           destroy-method="close">
-        <!-- 数据库驱动 -->
+        &lt;!&ndash; 数据库驱动 &ndash;&gt;
         <property name="driverClassName" value="${mysql.jdbc.driverClassName}" />
-        <!-- 基本属性 url、user、password -->
+        &lt;!&ndash; 基本属性 url、user、password &ndash;&gt;
         <property name="url" value="${mysql.jdbc.url}" />
         <property name="username" value="${mysql.jdbc.username}" />
         <property name="password" value="${mysql.jdbc.password}" />
-        <!-- 配置初始化大小、最小、最大 -->
+        &lt;!&ndash; 配置初始化大小、最小、最大 &ndash;&gt;
         <property name="initialSize" value="${mysql.jdbc.initSize}" />
         <property name="minIdle" value="${mysql.jdbc.maxIdle}" />
         <property name="maxActive" value="${mysql.jdbc.maxActive}" />
-        <!-- 配置获取连接等待超时的时间 -->
+        &lt;!&ndash; 配置获取连接等待超时的时间 &ndash;&gt;
         <property name="maxWait" value="${mysql.jdbc.maxWait}" />
-        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        &lt;!&ndash; 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 &ndash;&gt;
         <property name="timeBetweenEvictionRunsMillis" value="20000" />
-        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        &lt;!&ndash; 配置一个连接在池中最小生存的时间，单位是毫秒 &ndash;&gt;
         <property name="minEvictableIdleTimeMillis" value="30000" />
-        <!-- mysql中使用 -->
+        &lt;!&ndash; mysql中使用 &ndash;&gt;
         <property name="validationQuery" value="SELECT 1" />
         <property name="testWhileIdle" value="true" />
         <property name="testOnBorrow" value="false" />
         <property name="testOnReturn" value="false" />
-        <!-- 超过时间限制是否回收 -->
+        &lt;!&ndash; 超过时间限制是否回收 &ndash;&gt;
         <property name="removeAbandoned" value="true" />
         <property name="connectionProperties" value = "clientEncoding=UTF-8;serverEncoding=GBK;"/>
-        <!-- PSCache对支持游标的数据库性能提升巨大 -->
+        &lt;!&ndash; PSCache对支持游标的数据库性能提升巨大 &ndash;&gt;
         <property name="poolPreparedStatements" value="false" />
         <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
-        <!-- 配置监控统计拦截的filters -->
+        &lt;!&ndash; 配置监控统计拦截的filters &ndash;&gt;
         <property name="filters" value="mergeStat" />
     </bean>
-    <!--配置只读数据库-->
-    <!--<bean id="readOnlyDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+    &lt;!&ndash;配置只读数据库&ndash;&gt;
+    &lt;!&ndash;<bean id="readOnlyDataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
         <property name="driverClassName">
             <value>${jdbc.driverClassName}</value>
@@ -131,7 +131,7 @@ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
         <property name="connectionProperties">
             <value>clientEncoding=UTF-8;serverEncoding=GBK;</value>
         </property>
-    </bean>-->
+    </bean>&ndash;&gt;
     
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -140,17 +140,17 @@ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
         <property name="mapperLocations">
             <value>classpath*:com/lmm/**/map/*.xml</value>
         </property>
-        <!-- <property name="plugins"> <list> <value>com.lmmt.comm.mybatis.PaginationInterceptor</value> 
-            </list> </property> -->
+        &lt;!&ndash; <property name="plugins"> <list> <value>com.lmmt.comm.mybatis.PaginationInterceptor</value> 
+            </list> </property> &ndash;&gt;
     </bean>
 
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0" ref="sqlSessionFactory" />
     </bean>
-    <!--支持spring扫描mybatis自动建bean-->
+    &lt;!&ndash;支持spring扫描mybatis自动建bean&ndash;&gt;
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.lmm.mvc.demo.**.dao" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
-    </bean>
+    </bean>-->
     
 </beans>

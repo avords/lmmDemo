@@ -1,10 +1,8 @@
 package com.lmm.mvc.demo.web;
 
-import com.lmm.mvc.demo.model.User;
-import com.lmm.mvc.demo.service.UserService;
+import com.lmm.mvc.demo.aposervice.AopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,12 +17,25 @@ import javax.servlet.http.HttpServletResponse;
 public class UserController {
     
     @Autowired
-    private UserService userService;
-    
-    @RequestMapping("/getUserById/{id}")
+    private AopService aopService;
+
+    @RequestMapping("/getName")
     @ResponseBody
-    public User getUserById(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id){
-        User user = userService.getUserById(123L);
-        return user;
+    public String getName(HttpServletRequest request, HttpServletResponse response){
+        return aopService.getName();
+    }
+
+    @RequestMapping("/getAge")
+    @ResponseBody
+    public int getAge(HttpServletRequest request, HttpServletResponse response){
+        return aopService.getAge();
+        
+    }
+
+    @RequestMapping("/getSchool")
+    @ResponseBody
+    public String getSchool(HttpServletRequest request, HttpServletResponse response){
+        return aopService.getSchool();
+
     }
 }

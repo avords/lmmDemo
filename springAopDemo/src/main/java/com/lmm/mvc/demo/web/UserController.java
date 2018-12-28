@@ -1,6 +1,7 @@
 package com.lmm.mvc.demo.web;
 
 import com.lmm.mvc.demo.aposervice.AopService;
+import com.lmm.mvc.demo.util.ApplicationContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,12 +23,15 @@ public class UserController {
     @RequestMapping("/getName")
     @ResponseBody
     public String getName(HttpServletRequest request, HttpServletResponse response){
+
+        Object obj = ApplicationContextUtils.getApplicationContext().getBean("aopService");
         return aopService.getName();
     }
 
     @RequestMapping("/getAge")
     @ResponseBody
     public int getAge(HttpServletRequest request, HttpServletResponse response){
+        Object obj = ApplicationContextUtils.getApplicationContext().getBean("aopService");
         return aopService.getAge();
         
     }

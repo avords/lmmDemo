@@ -11,9 +11,7 @@
     <bean id="userAop1" class="com.lmm.mvc.demo.aop.UserAop1"/>
 
     <aop:config proxy-target-class="true">
-<!--
         <aop:advisor pointcut="execution(* com.lmm..AopService.*(..))" advice-ref="userAop1"/>
--->
         <aop:advisor pointcut="execution(* com.lmm..AbstractService.*(..))" advice-ref="userAop1"/>
 
     </aop:config>

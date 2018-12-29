@@ -59,6 +59,8 @@
         <module>utilsDemo</module>
         <module>hystrixDemo</module>
         <module>disruptorDemo</module>
+        <module>igniteServer</module>
+        <module>igniteClient</module>
     </modules>
          <!--编译插件配置-->
     <build>

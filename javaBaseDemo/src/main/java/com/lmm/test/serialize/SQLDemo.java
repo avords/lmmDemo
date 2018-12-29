@@ -14,7 +14,6 @@ public class SQLDemo {
         String str = bufferedReader.readLine();
         while (str!=null){
             
-            String 
             str = bufferedReader.readLine();
         }
                 

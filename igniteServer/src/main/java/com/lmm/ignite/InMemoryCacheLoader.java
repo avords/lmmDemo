@@ -33,11 +33,11 @@ public class InMemoryCacheLoader implements IgniteCacheLoader {
         CacheConfiguration<I, T> cacheCfg = new CacheConfiguration<I, T>(cacheName);
         cacheCfg.setAtomicityMode(CacheAtomicityMode.TRANSACTIONAL);
         cacheCfg.setIndexedTypes(idClass, entityClass);
-        cacheCfg.setStartSize(1000);
+        //cacheCfg.setStartSize(1000);
         cacheCfg.setCacheMode(CacheMode.REPLICATED);
         cacheCfg.setBackups(0);
         //cacheCfg.setOffHeapMaxMemory(0);
-        cacheCfg.setSwapEnabled(false);
+        //cacheCfg.setSwapEnabled(false);
 
         //cacheCfg.setCacheStoreFactory(FactoryBuilder.factoryOf(cacheStoreClass));
 

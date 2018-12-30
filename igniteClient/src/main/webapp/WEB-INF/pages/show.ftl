@@ -8,12 +8,12 @@
 <body>
 
 <h4>USER缓存管理</h4>
-<form name="product_cache_form" method="post" action="/igniteClient/ignite/saveUser">
+<form name="product_cache_form" method="post" action="/igniteClient/ignite/user/save">
     <div>User ID: <input type="text" name="id"></div>
     <div>Name: <input type="text" name="name"></div>
-    <div>Id Card: <input type="text" name="name"></div>
-    <div>School: <input type="text" name="name"></div>
-    <div>Age: <input type="text" name="name"></div>
+    <div>Id Card: <input type="text" name="idCard"></div>
+    <div>School: <input type="text" name="school"></div>
+    <div>Age: <input type="text" name="age"></div>
     <input type="submit" value="保存数据" name="load">
 </form>
 

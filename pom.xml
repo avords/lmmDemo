@@ -61,6 +61,7 @@
         <module>disruptorDemo</module>
         <module>igniteServer</module>
         <module>igniteClient</module>
+        <module>distributedLock</module>
     </modules>
          <!--编译插件配置-->
     <build>

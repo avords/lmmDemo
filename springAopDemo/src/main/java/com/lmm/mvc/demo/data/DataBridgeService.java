@@ -146,12 +146,12 @@ public class DataBridgeService implements InitializingBean {
             for (int tbIndex = 0; tbIndex < NUM_TB; tbIndex++) {
                 stateMap.put(TAG_CURRENT_TABLE_HANDLED_COUNT, "0");
                 Long lastOrderId = getTableLastHandledOrderId(dbIndex, tbIndex);
-                long startOrderId = lastOrderId == null ? 0 : lastOrderId + 1;
+                long startOrderId = lastOrderId == null ? 0 : lastOrderId;
 
                 int pageSize = Integer.valueOf(config.getQueryPageSize());
                 while (true) {
                     while (!config.isShouldProcess()) {
-                        logger.info("should not proccess in this time" + dbIndex + "," + tbIndex + "," + startOrderId);
+                        logger.info("should not process in this time" + dbIndex + "," + tbIndex + "," + startOrderId);
                         isRunning = false;
                         try {
                             TimeUnit.SECONDS.sleep(10);
@@ -164,6 +164,7 @@ public class DataBridgeService implements InitializingBean {
                     if (!hasMoreData) {
                         break;
                     }
+                    startOrderId = getTableLastHandledOrderId(dbIndex, tbIndex);
                 }
 
                 if ((tbIndex % 50) == 0) {

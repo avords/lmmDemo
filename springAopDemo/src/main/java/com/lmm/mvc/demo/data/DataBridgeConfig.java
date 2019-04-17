@@ -21,7 +21,13 @@ public class DataBridgeConfig {
     @XmlyconfFileItem(name = "data.process.db.querypagesize")
     private String queryPageSize = "1000";
 
+    // page for redis
+    @XmlyconfFileItem(name = "data.process.perpage.day")
+    private String perPageDay = "30";
 
+    @XmlyconfFileItem(name = "data.process.perpage.night")
+    private String perPageNight = "200";
+    
     public String getProcess() {
         return process;
     }
@@ -57,5 +63,21 @@ public class DataBridgeConfig {
 
     public boolean isReady() {
         return resetProcess != null;
+    }
+
+    public String getPerPageDay() {
+        return perPageDay;
+    }
+
+    public void setPerPageDay(String perPageDay) {
+        this.perPageDay = perPageDay;
+    }
+
+    public String getPerPageNight() {
+        return perPageNight;
+    }
+
+    public void setPerPageNight(String perPageNight) {
+        this.perPageNight = perPageNight;
     }
 }

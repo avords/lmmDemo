@@ -11,6 +11,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -188,7 +189,6 @@ public class DataBridgeService implements InitializingBean {
             boolean notEmptyResult = CollectionUtils.isNotEmpty(userProductPermissions);
 
             if (notEmptyResult) {
-                int size = 0;
 
                 List<Object> redisKeyValues = new ArrayList<>();//构造新数据
 
@@ -196,17 +196,27 @@ public class DataBridgeService implements InitializingBean {
 
                 //批量保存
 
-                long maxOrderId = 0;
+                int size = 0;
+                long lastOrderId = 0;
                 totalCount.addAndGet(size);
 
-                saveLastHandledOrderId(dbIndex, tbIndex, maxOrderId);
+                saveLastHandledOrderId(dbIndex, tbIndex, lastOrderId);
 
-                saveState(maxOrderId, size);
+                saveState(lastOrderId, size);
 
-                try {
-                    logger.info("wait a moment per page, totalCount {}, dbIndex {}, tableName {} page {}", totalCount.get(), dbIndex, tbIndex, maxOrderId);
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (Exception e) {
+                int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+                int insertPerPage = Integer.valueOf(config.getPerPageDay());
+                if (hour >= 1 && hour <= 7) {
+                    insertPerPage = Integer.valueOf(config.getPerPageNight());
+                }
+
+                int currentTableHandledCount = stateMap.containsKey(TAG_CURRENT_TABLE_HANDLED_COUNT) ? Integer.parseInt(stateMap.get(TAG_CURRENT_TABLE_HANDLED_COUNT)) : 0;
+                if (currentTableHandledCount % (insertPerPage * pageSize) == 0) {
+                    try {
+                        logger.info("wait a moment per page, totalCount {}, dbIndex {}, tableName {} lastOrderId {}", totalCount.get(), dbIndex, tbIndex, lastOrderId);
+                        TimeUnit.SECONDS.sleep(1);
+                    } catch (Exception e) {
+                    }
                 }
             }
 

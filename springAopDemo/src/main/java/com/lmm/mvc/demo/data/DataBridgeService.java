@@ -195,7 +195,7 @@ public class DataBridgeService implements InitializingBean {
 
                 logger.info("to save to new order sys " + dbIndex + "," + tbIndex + "," + startOrderId + " keys: " + redisKeyValues.size());
 
-                //批量保存
+                //批量保存批量保存
                 saveSourceData(sourceData);
                 int size = sourceData.size();
                 long lastOrderId = 0;//sourceData.get(size - 1);
@@ -266,13 +266,13 @@ public class DataBridgeService implements InitializingBean {
         return null;
     }
 
-    private void saveLastHandledOrderId(int dbIndex, int tbIndex, long maxOrderId) {
+    private void saveLastHandledOrderId(int dbIndex, int tbIndex, long lastOrderId) {
 
         String key = getCacheKey(dbIndex, tbIndex);
 
-        dbTablesHandledOrderId.put(key, maxOrderId);
+        dbTablesHandledOrderId.put(key, lastOrderId);
 
-        redisTemplate.opsForValue().set(key, String.valueOf(maxOrderId), REDIS_EXPIRE_TIME_SECOND, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(key, String.valueOf(lastOrderId), REDIS_EXPIRE_TIME_SECOND, TimeUnit.SECONDS);
     }
 
     //此表最大的orderId

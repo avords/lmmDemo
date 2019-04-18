@@ -36,13 +36,14 @@ public class DataBridgeService implements InitializingBean {
 
     private static final int NUM_DB = 4;  // equals to physical db count
     private static final int NUM_TB = 1000;
+    private static final int REDIS_EXPIRE_TIME_SECOND = 60 * 24 * 3600;
 
     private volatile boolean initialized = false;
 
     private static final String TAG_DB_INDEX = "DB_INDEX";//同步到第几库
     private static final String TAG_TB_INDEX = "TB_INDEX";//同步到第几表
     private static final String TAG_HANDLING_ORDER_ID = "HANDLING_ORDER_ID";//开始处理的startOrderId
-    private static final String TAG_LAST_FINISHED_ORDER_ID = "LAST_FINISHED_ORDER_ID";//成功处理后的maxOrderId
+    private static final String TAG_LAST_FINISHED_ORDER_ID = "LAST_FINISHED_ORDER_ID";//成功处理后的lastOrderId
     private static final String TAG_HANDLED_COUNT = "HANDLED_COUNT";//当前同步库同步的总数据量
     private static final String TAG_CURRENT_TABLE_HANDLED_COUNT = "CURRENT_TABLE_HANDLED_COUNT";//当前同步库当前表同步的总数据量
 
@@ -198,7 +199,7 @@ public class DataBridgeService implements InitializingBean {
                 saveSourceData(sourceData);
                 int size = sourceData.size();
                 long lastOrderId = 0;//sourceData.get(size - 1);
-                
+
                 totalCount.addAndGet(size);
 
                 saveLastHandledOrderId(dbIndex, tbIndex, lastOrderId);
@@ -271,7 +272,7 @@ public class DataBridgeService implements InitializingBean {
 
         dbTablesHandledOrderId.put(key, maxOrderId);
 
-        redisTemplate.opsForValue().set(key, String.valueOf(maxOrderId), 60 * 24 * 3600, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(key, String.valueOf(maxOrderId), REDIS_EXPIRE_TIME_SECOND, TimeUnit.SECONDS);
     }
 
     //此表最大的orderId
@@ -339,7 +340,7 @@ public class DataBridgeService implements InitializingBean {
                     long total = totalCount.get();
                     logger.info("save total count to redis, total {}", total);
 
-                    redisTemplate.opsForValue().set(TOTAL_COUNT_REDIS_KEY, String.valueOf(total), 60 * 24 * 3600, TimeUnit.SECONDS);
+                    redisTemplate.opsForValue().set(TOTAL_COUNT_REDIS_KEY, String.valueOf(total), REDIS_EXPIRE_TIME_SECOND, TimeUnit.SECONDS);
                     TimeUnit.SECONDS.sleep(5);
                 } catch (Exception e) {
                 }

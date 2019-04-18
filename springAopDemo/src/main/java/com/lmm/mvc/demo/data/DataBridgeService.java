@@ -184,9 +184,9 @@ public class DataBridgeService implements InitializingBean {
             stateMap.put(TAG_TB_INDEX, String.valueOf(tbIndex));
             stateMap.put(TAG_HANDLING_ORDER_ID, String.valueOf(startOrderId));
 
-            List<Object> userProductPermissions = null;//得到数据
+            List sourceData = getSourceData(startOrderId, pageSize, dbIndex, tbIndex);//得到数据
 
-            boolean notEmptyResult = CollectionUtils.isNotEmpty(userProductPermissions);
+            boolean notEmptyResult = CollectionUtils.isNotEmpty(sourceData);
 
             if (notEmptyResult) {
 
@@ -195,9 +195,10 @@ public class DataBridgeService implements InitializingBean {
                 logger.info("to save to new order sys " + dbIndex + "," + tbIndex + "," + startOrderId + " keys: " + redisKeyValues.size());
 
                 //批量保存
-
-                int size = 0;
-                long lastOrderId = 0;
+                saveSourceData(sourceData);
+                int size = sourceData.size();
+                long lastOrderId = 0;//sourceData.get(size - 1);
+                
                 totalCount.addAndGet(size);
 
                 saveLastHandledOrderId(dbIndex, tbIndex, lastOrderId);
@@ -235,6 +236,13 @@ public class DataBridgeService implements InitializingBean {
 
             stateMap.put(TAG_LAST_FINISHED_ORDER_ID, String.valueOf(maxOrderId));
         }
+    }
+
+    private void saveSourceData(List sourceData) {
+    }
+
+    private List getSourceData(Long startOrderId, int pageSize, int dbIndex, int tbIndex) {
+        return new ArrayList();
     }
 
 

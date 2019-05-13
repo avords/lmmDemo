@@ -37,13 +37,6 @@ public class Test {
     private static final Logger logger = LoggerFactory.getLogger(Test.class);
 
     public static void main(String[] args) {
-        String sql = "INSERT INTO XIMA_CNT.CNT_AREA(CODE,NAME,CITY_CODE) VALUES ('%s','%s','442000');";
-
-        String[] line = addr.split("\n");
-        for (int i = 0; i < line.length; i++) {
-            String[] tmp = line[i].split(",");
-            String r = String.format(sql, tmp[0], tmp[1]);
-            System.out.println(r);
-        }
+        System.out.println(String.class.getName());
     }
 }

@@ -12,21 +12,25 @@ import java.io.FileWriter;
 public class SQLUtil1 {
     public static void main(String[] args) throws Exception {
 
-        String[] sqls = {"CREATE TABLE `XIMA_CRD_00`.`CRD_DRAFT_ORDER_%s` LIKE `XIMA_CRD_00`.`CRD_DRAFT_ORDER_00`;",
-        "CREATE TABLE `XIMA_CRD_00`.`CRD_DRAFT_ORDER_ITEM_%s` LIKE `XIMA_CRD_00`.`CRD_DRAFT_ORDER_ITEM_00`;",
-        "CREATE TABLE `XIMA_CRD_00`.`CRD_PRICED_ORDER_%s` LIKE `XIMA_CRD_00`.`CRD_PRICED_ORDER_00`;",
-        "CREATE TABLE `XIMA_CRD_00`.`CRD_PRICED_ORDER_LINE_%s` LIKE `XIMA_CRD_00`.`CRD_PRICED_ORDER_LINE_00`;",
-        "CREATE TABLE `XIMA_CRD_00`.`CRD_ORDER_STATUS_RECORD_%s` LIKE `XIMA_CRD_00`.`CRD_ORDER_STATUS_RECORD_00`;"};
+        String sql = "CREATE INDEX IX_BUYER_ID_DOMAIN ON XIMA_TRD_{dbIndex}.TRD_DRAFT_ORDER_{tbIndex} (`BUYER_ID`,`DOMAIN`);\n" +
+                "CREATE INDEX IX_BUYER_ID_DOMAIN ON XIMA_TRD_{dbIndex}.TRD_PRICED_ORDER_{tbIndex} (`BUYER_ID`,`DOMAIN`);\n" +
+                "CREATE INDEX IX_PRICED_ORDER_ID_ITEM_ID ON XIMA_TRD_{dbIndex}.TRD_PRICED_ORDER_LINE_{tbIndex} (`PRICED_ORDER_ID`,`ITEM_ID`);";
+        
+        sql = "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_DRAFT_ORDER_{tbIndex} DROP INDEX IX_BUYER_ID;\n" +
+                "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_PRICED_ORDER_{tbIndex} DROP INDEX IX_BUYER_ID;\n" +
+                "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_PRICED_ORDER_LINE_{tbIndex} DROP INDEX IX_PRICED_ORDER_ID;";
         int tableNum = 100;
+        int dbNum = 8;
 
-        String path = SQLUtil1.class.getResource("/").getPath();
+        String path = SQLUtil.class.getResource("/").getPath();
         BufferedWriter out = new BufferedWriter(new FileWriter(path + "buildSQL.sql"));
+        int tbBit = String.valueOf(tableNum - 1).length();
 
-        int bit = String.valueOf(tableNum - 1).length();
-
-        for (String sql : sqls) {
-            for (int i = 1; i < tableNum; i++) {
-                String sqlTemp = String.format(sql, StringUtils.leftPad(String.valueOf(i), bit, "0"));
+        for (int i = 0; i < dbNum; i++) {
+            for (int j = 0; j < tableNum; j++) {
+                
+                String sqlTemp = sql.replaceAll("\\{dbIndex}", StringUtils.leftPad(String.valueOf(i), 2, "0"))
+                        .replaceAll("\\{tbIndex}", StringUtils.leftPad(String.valueOf(j), tbBit, "0"));
                 out.write(sqlTemp + "\n");
             }
         }

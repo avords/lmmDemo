@@ -19,8 +19,11 @@ public class SQLUtil1 {
         sql = "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_DRAFT_ORDER_{tbIndex} DROP INDEX IX_BUYER_ID;\n" +
                 "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_PRICED_ORDER_{tbIndex} DROP INDEX IX_BUYER_ID;\n" +
                 "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_PRICED_ORDER_LINE_{tbIndex} DROP INDEX IX_PRICED_ORDER_ID;";
+        
+        sql = "ALTER TABLE `XIMA_TRD_{dbIndex}`.`TRD_PRICED_ORDER_{tbIndex}` CHANGE COLUMN FULFILL_TYPE_ID TRADE_TYPE SMALLINT  DEFAULT NULL;";
+        //sql = "ALTER TABLE `XIMA_TRD_{dbIndex}`.`TRD_DRAFT_ORDER_{tbIndex}` CHANGE COLUMN FULFILL_TYPE_ID TRADE_TYPE SMALLINT  DEFAULT NULL;";
         int tableNum = 100;
-        int dbNum = 8;
+        int dbNum = 12;
 
         String path = SQLUtil.class.getResource("/").getPath();
         BufferedWriter out = new BufferedWriter(new FileWriter(path + "buildSQL.sql"));

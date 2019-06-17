@@ -10,15 +10,17 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -31,14 +33,24 @@ public class DataBridgeService implements InitializingBean {
     @Autowired
     private DataBridgeConfig config;
 
-    /*@Autowired*/
+    @Autowired
     private RedisTemplate redisTemplate;
 
-    private static final int NUM_DB = 4;  // equals to physical db count
-    private static final int NUM_TB = 1000;
+    @Autowired
+    //private DraftOrderService draftOrderService;
+
+    @Autowired
+    private ExecutorService executors;
+
+    private static final int NUM_DB = 9;  // equals to physical db count
+    private static final int NUM_TB = 100;
     private static final int REDIS_EXPIRE_TIME_SECOND = 60 * 24 * 3600;
 
     private volatile boolean initialized = false;
+    private volatile boolean isClearProcessMode = false;
+    private Date startTime;
+    private Date endTime;
+
 
     private static final String TAG_DB_INDEX = "DB_INDEX";//同步到第几库
     private static final String TAG_TB_INDEX = "TB_INDEX";//同步到第几表
@@ -48,8 +60,6 @@ public class DataBridgeService implements InitializingBean {
     private static final String TAG_CURRENT_TABLE_HANDLED_COUNT = "CURRENT_TABLE_HANDLED_COUNT";//当前同步库当前表同步的总数据量
 
     private AtomicLong totalCount = new AtomicLong(0);
-
-    private ExecutorService executors = Executors.newFixedThreadPool(20);
 
     private List<HandleDataBridgeTask> dbHandleTasks = new ArrayList<HandleDataBridgeTask>();
 
@@ -79,10 +89,13 @@ public class DataBridgeService implements InitializingBean {
         logger.info("  total totalCount  : " + totalCount.get());
 
         logger.info("  initialized: " + initialized);
+        logger.info("  isClearProcessMode: " + isClearProcessMode);
         logger.info("  config.resetProcess: " + config.getResetProcess());
         logger.info("  config.process: " + config.getProcess());
         logger.info("  config.pagesize: " + config.getQueryPageSize());
-        //logger.info("  config.updateFrom: " + config.getUpdateFrom() + ", " + updateFrom);
+        logger.info("  config.startTime: " + config.getStartTime() + ", " + startTime);
+        logger.info("  config.endTime: " + config.getEndTime() + ", " + endTime);
+
 
         for (HandleDataBridgeTask task : dbHandleTasks) {
             boolean isRunning = task.isRunning;
@@ -191,14 +204,22 @@ public class DataBridgeService implements InitializingBean {
 
             if (notEmptyResult) {
 
-                List<Object> redisKeyValues = new ArrayList<>();//构造新数据
+                if (isClearProcessMode) {
 
-                logger.info("to save to new order sys " + dbIndex + "," + tbIndex + "," + startOrderId + " keys: " + redisKeyValues.size());
+                    logger.info("del from new order sys for: " + dbIndex + "," + tbIndex + "," + startOrderId + " keys: " + sourceData.size());
 
-                //批量保存批量保存
-                saveSourceData(sourceData);
+                    //批量删除
+                    deleteSourceData(sourceData);
+                } else {
+
+                    logger.info("to save to new order sys " + dbIndex + "," + tbIndex + "," + startOrderId + " keys: " + sourceData.size());
+
+                    //批量保存批量保存
+                    saveSourceData(sourceData);
+                }
+
                 int size = sourceData.size();
-                long lastOrderId = 0;//sourceData.get(size - 1);
+                long lastOrderId = 0;//sourceData.get(size - 1).getId();//sourceData.get(size - 1);
 
                 totalCount.addAndGet(size);
 
@@ -240,10 +261,15 @@ public class DataBridgeService implements InitializingBean {
     }
 
     private void saveSourceData(List sourceData) {
+        //draftOrderService.saveNewDraftOrder(sourceData);
+    }
+
+    private void deleteSourceData(List sourceData) {
+        //draftOrderService.deleteNewDraftOrder(sourceData);
     }
 
     private List getSourceData(Long startOrderId, int pageSize, int dbIndex, int tbIndex) {
-        return new ArrayList();
+        //return draftOrderService.getOldDraftOrders(dbIndex, tbIndex, startOrderId, startTime, endTime, pageSize);
     }
 
 
@@ -316,8 +342,42 @@ public class DataBridgeService implements InitializingBean {
             } catch (Exception e) {
             }
 
+            isClearProcessMode = config.shouldClearProcess();
+            startTime = parseUpdateFrom(config.getStartTime());
+            endTime = parseUpdateFrom(config.getEndTime());
+
             logger.info("Initialize done");
             initialized = true;
+        }
+
+        private Date parseUpdateFrom(String updateFromStr) {
+            Date updateFromDate = null;
+            if (updateFromStr != null && updateFromStr.length() > 0) {
+                SimpleDateFormat dtf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                try {
+                    updateFromDate = dtf.parse(updateFromStr);
+                    return updateFromDate;
+                } catch (ParseException e) {
+                    //e.printStackTrace(); // ignore this
+                }
+
+                dtf = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    updateFromDate = dtf.parse(updateFromStr);
+                    return updateFromDate;
+                } catch (ParseException e) {
+                    //e.printStackTrace(); // ignore this
+                }
+
+                try {
+                    long time = Long.parseLong(updateFromStr);
+                    updateFromDate = new Date(time);
+                    return updateFromDate;
+                } catch (Exception e) {
+                    //e.printStackTrace(); // ignore this
+                }
+            }
+            return updateFromDate;
         }
     }
 

@@ -18,6 +18,10 @@ public class DataBridgeConfig {
     @XmlyconfFileItem(name = "data.resetprocess")
     private String resetProcess;
 
+    private static final String SHOULD_CLEAR_PROCESS = "1";
+    @XmlyconfFileItem(name = "draft.order.data.clearprocess")
+    private String clearProcess;
+    
     @XmlyconfFileItem(name = "data.process.db.querypagesize")
     private String queryPageSize = "1000";
 
@@ -28,6 +32,13 @@ public class DataBridgeConfig {
     @XmlyconfFileItem(name = "data.process.perpage.night")
     private String perPageNight = "200";
     
+    // supporting format: "2018-03-27 12:13:14" (preferred), "2018-3-27", "1522289570437"
+    @XmlyconfFileItem(name = "draft.order.data.start.time")
+    private String startTime;
+
+    @XmlyconfFileItem(name = "draft.order.data.end.time")
+    private String endTime;
+
     public String getProcess() {
         return process;
     }
@@ -79,5 +90,33 @@ public class DataBridgeConfig {
 
     public void setPerPageNight(String perPageNight) {
         this.perPageNight = perPageNight;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getClearProcess() {
+        return clearProcess;
+    }
+
+    public void setClearProcess(String clearProcess) {
+        this.clearProcess = clearProcess;
+    }
+
+    public boolean shouldClearProcess() {
+        return SHOULD_CLEAR_PROCESS.equals(clearProcess);
     }
 }

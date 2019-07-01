@@ -6,8 +6,8 @@ package com.lmm.utils;
  */
 public class DBDemo {
     public static void main(String[] args) {
-        Long userId = 44880142L;
+        Long userId = 203715L;
 
-        System.out.println("DB:" + userId % 8 + ",TB:" + userId /8);
+        System.out.println("DB:" + userId % 10 + ",TB:" + userId / 10 % 1000);
     }
 }

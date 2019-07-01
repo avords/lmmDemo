@@ -9,7 +9,7 @@ import java.io.FileWriter;
  * @author: arno.yan
  * @Date: 2019/3/26
  */
-public class SQLUtil1 {
+public class TradeOrderSQLUtil1 {
     public static void main(String[] args) throws Exception {
 
         String sql = "CREATE INDEX IX_BUYER_ID_DOMAIN ON XIMA_TRD_{dbIndex}.TRD_DRAFT_ORDER_{tbIndex} (`BUYER_ID`,`DOMAIN`);\n" +
@@ -20,13 +20,16 @@ public class SQLUtil1 {
                 "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_PRICED_ORDER_{tbIndex} DROP INDEX IX_BUYER_ID;\n" +
                 "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_PRICED_ORDER_LINE_{tbIndex} DROP INDEX IX_PRICED_ORDER_ID;";
         
-        sql = "ALTER TABLE `XIMA_TRD_{dbIndex}`.`TRD_PRICED_ORDER_{tbIndex}` CHANGE COLUMN FULFILL_TYPE_ID TRADE_TYPE SMALLINT  DEFAULT NULL;";
+        sql = "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_DRAFT_ORDER_{tbIndex} MODIFY COLUMN `CLIENT_AGENT` VARCHAR(50) DEFAULT NULL,MODIFY COLUMN `CLIENT_IP` VARCHAR(150) DEFAULT NULL,MODIFY COLUMN `CLIENT_DEVICE_ID` VARCHAR(150) DEFAULT NULL;\n" +
+                "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_PRICED_ORDER_{tbIndex} MODIFY COLUMN `CLIENT_AGENT` VARCHAR(50) DEFAULT NULL,MODIFY COLUMN `CLIENT_IP` VARCHAR(150) DEFAULT NULL,MODIFY COLUMN `CLIENT_DEVICE_ID` VARCHAR(150) DEFAULT NULL;";
         //sql = "ALTER TABLE `XIMA_TRD_{dbIndex}`.`TRD_DRAFT_ORDER_{tbIndex}` CHANGE COLUMN FULFILL_TYPE_ID TRADE_TYPE SMALLINT  DEFAULT NULL;";
         int tableNum = 100;
-        int dbNum = 12;
+        int dbNum = 10;
 
         String path = SQLUtil.class.getResource("/").getPath();
-        BufferedWriter out = new BufferedWriter(new FileWriter(path + "buildSQL.sql"));
+        BufferedWriter out82 = new BufferedWriter(new FileWriter(path + "buildSQL82.sql"));
+        BufferedWriter out84 = new BufferedWriter(new FileWriter(path + "buildSQL84.sql"));
+
         int tbBit = String.valueOf(tableNum - 1).length();
 
         for (int i = 0; i < dbNum; i++) {
@@ -34,11 +37,18 @@ public class SQLUtil1 {
                 
                 String sqlTemp = sql.replaceAll("\\{dbIndex}", StringUtils.leftPad(String.valueOf(i), 2, "0"))
                         .replaceAll("\\{tbIndex}", StringUtils.leftPad(String.valueOf(j), tbBit, "0"));
-                out.write(sqlTemp + "\n");
+                if(i%2==0) {
+                    out82.write(sqlTemp + "\n");
+                }else{
+                    out84.write(sqlTemp + "\n");
+                }
             }
         }
 
-        out.flush();
-        out.close();
+        out82.flush();
+        out82.close();
+
+        out84.flush();
+        out84.close();
     }
 }

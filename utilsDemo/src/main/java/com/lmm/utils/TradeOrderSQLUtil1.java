@@ -20,15 +20,14 @@ public class TradeOrderSQLUtil1 {
                 "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_PRICED_ORDER_{tbIndex} DROP INDEX IX_BUYER_ID;\n" +
                 "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_PRICED_ORDER_LINE_{tbIndex} DROP INDEX IX_PRICED_ORDER_ID;";
         
-        sql = "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_DRAFT_ORDER_{tbIndex} MODIFY COLUMN `CLIENT_AGENT` VARCHAR(50) DEFAULT NULL,MODIFY COLUMN `CLIENT_IP` VARCHAR(150) DEFAULT NULL,MODIFY COLUMN `CLIENT_DEVICE_ID` VARCHAR(150) DEFAULT NULL;\n" +
-                "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_PRICED_ORDER_{tbIndex} MODIFY COLUMN `CLIENT_AGENT` VARCHAR(50) DEFAULT NULL,MODIFY COLUMN `CLIENT_IP` VARCHAR(150) DEFAULT NULL,MODIFY COLUMN `CLIENT_DEVICE_ID` VARCHAR(150) DEFAULT NULL;";
+        sql = "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_DRAFT_ORDER_{tbIndex} ADD INDEX `IX_LAST_UPDATE_TIME` (`LAST_UPDATE_TIME`);";
         //sql = "ALTER TABLE `XIMA_TRD_{dbIndex}`.`TRD_DRAFT_ORDER_{tbIndex}` CHANGE COLUMN FULFILL_TYPE_ID TRADE_TYPE SMALLINT  DEFAULT NULL;";
         int tableNum = 100;
         int dbNum = 10;
 
         String path = SQLUtil.class.getResource("/").getPath();
-        BufferedWriter out82 = new BufferedWriter(new FileWriter(path + "buildSQL82.sql"));
-        BufferedWriter out84 = new BufferedWriter(new FileWriter(path + "buildSQL84.sql"));
+        BufferedWriter out82 = new BufferedWriter(new FileWriter(path + "mysql-xima-082.ximalaya.local.sql"));
+        BufferedWriter out84 = new BufferedWriter(new FileWriter(path + "mysql-xima-084.ximalaya.local.sql"));
 
         int tbBit = String.valueOf(tableNum - 1).length();
 

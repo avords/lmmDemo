@@ -20,14 +20,14 @@ public class TradeSearchSQLUtil2 {
                 "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_PRICED_ORDER_{tbIndex} DROP INDEX IX_BUYER_ID;\n" +
                 "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_PRICED_ORDER_LINE_{tbIndex} DROP INDEX IX_PRICED_ORDER_ID;";
 
-        sql = "alter table `XIMA_TRD_{dbIndex}`.`TRD_PROMOTION_ITEM_{tbIndex}` add `AMOUNT` decimal(20,6) DEFAULT NULL AFTER `PROMOTION_TYPE_ID`;";
+        sql = "CREATE INDEX IX_BUYER_ID_TRADE_ORDER_NO ON XIMA_URD_{dbIndex}.URD_USER_ORDER_{tbIndex} (BUYER_ID, TRADE_ORDER_NO);";
         //sql = "ALTER TABLE `XIMA_TRD_{dbIndex}`.`TRD_DRAFT_ORDER_{tbIndex}` CHANGE COLUMN FULFILL_TYPE_ID TRADE_TYPE SMALLINT  DEFAULT NULL;";
-        int tableNum = 100;
+        int tableNum = 1000;
         int dbNum = 10;
 
         String path = SQLUtil.class.getResource("/").getPath();
-        BufferedWriter out82 = new BufferedWriter(new FileWriter(path + "mysql-xima-082.ximalaya.local.sql.sql"));
-        BufferedWriter out84 = new BufferedWriter(new FileWriter(path + "mysql-xima-084.ximalaya.local.sql.sql"));
+        BufferedWriter out82 = new BufferedWriter(new FileWriter(path + "mysql-xima-082.ximalaya.local.sql"));
+        BufferedWriter out84 = new BufferedWriter(new FileWriter(path + "mysql-xima-084.ximalaya.local.sql"));
 
         int tbBit = String.valueOf(tableNum - 1).length();
 

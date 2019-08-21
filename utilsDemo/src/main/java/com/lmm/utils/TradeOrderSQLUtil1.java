@@ -20,10 +20,11 @@ public class TradeOrderSQLUtil1 {
                 "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_PRICED_ORDER_{tbIndex} DROP INDEX IX_BUYER_ID;\n" +
                 "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_PRICED_ORDER_LINE_{tbIndex} DROP INDEX IX_PRICED_ORDER_ID;";
         
-        sql = "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_DRAFT_ORDER_{tbIndex} ADD INDEX `IX_LAST_UPDATE_TIME` (`LAST_UPDATE_TIME`);";
-        //sql = "ALTER TABLE `XIMA_TRD_{dbIndex}`.`TRD_DRAFT_ORDER_{tbIndex}` CHANGE COLUMN FULFILL_TYPE_ID TRADE_TYPE SMALLINT  DEFAULT NULL;";
+        sql = "DROP TABLE TPN_USER_PURCHASE_RECORD_{tbIndex};";
+        //sql = "UPDATE XIMA_TRD_{dbIndex}.TRD_ORDER_STATUS_RECORD_{tbIndex} SET STATUS_ID=2 WHERE STATUS_ID=4;";
+        
         int tableNum = 100;
-        int dbNum = 10;
+        int dbNum = 1;
 
         String path = SQLUtil.class.getResource("/").getPath();
         BufferedWriter out82 = new BufferedWriter(new FileWriter(path + "mysql-xima-082.ximalaya.local.sql"));

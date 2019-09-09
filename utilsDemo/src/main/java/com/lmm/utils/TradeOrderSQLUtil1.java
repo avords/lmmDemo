@@ -20,11 +20,12 @@ public class TradeOrderSQLUtil1 {
                 "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_PRICED_ORDER_{tbIndex} DROP INDEX IX_BUYER_ID;\n" +
                 "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_PRICED_ORDER_LINE_{tbIndex} DROP INDEX IX_PRICED_ORDER_ID;";
         
-        sql = "DROP TABLE TPN_USER_PURCHASE_RECORD_{tbIndex};";
+        sql = "CREATE INDEX IX_DRAFT_ORDER_ID_ORDER_STATUS_ID ON XIMA_TRD_{dbIndex}.TRD_ORDER_STATUS_RECORD_{tbIndex} (`DRAFT_ORDER_ID`,`ORDER_STATUS_ID`);\n" +
+                "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_ORDER_STATUS_RECORD_{tbIndex} DROP INDEX IX_DRAFT_ORDER_ID_CREATE_TIME ;";
         //sql = "UPDATE XIMA_TRD_{dbIndex}.TRD_ORDER_STATUS_RECORD_{tbIndex} SET STATUS_ID=2 WHERE STATUS_ID=4;";
         
         int tableNum = 100;
-        int dbNum = 1;
+        int dbNum = 10;
 
         String path = SQLUtil.class.getResource("/").getPath();
         BufferedWriter out82 = new BufferedWriter(new FileWriter(path + "mysql-xima-082.ximalaya.local.sql"));

@@ -20,7 +20,7 @@ public class TradeSearchSQLUtil2 {
                 "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_PRICED_ORDER_{tbIndex} DROP INDEX IX_BUYER_ID;\n" +
                 "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_PRICED_ORDER_LINE_{tbIndex} DROP INDEX IX_PRICED_ORDER_ID;";
 
-        sql = "CREATE INDEX IX_BUYER_ID_TRADE_ORDER_NO ON XIMA_URD_{dbIndex}.URD_USER_ORDER_{tbIndex} (BUYER_ID, TRADE_ORDER_NO);";
+        sql = "ALTER TABLE XIMA_URD_{dbIndex}.URD_USER_ORDER_{tbIndex} ADD COLUMN `TRADE_TYPE` TINYINT DEFAULT 1 AFTER `ORDER_TYPE`;";
         //sql = "ALTER TABLE `XIMA_TRD_{dbIndex}`.`TRD_DRAFT_ORDER_{tbIndex}` CHANGE COLUMN FULFILL_TYPE_ID TRADE_TYPE SMALLINT  DEFAULT NULL;";
         int tableNum = 1000;
         int dbNum = 10;
@@ -34,7 +34,7 @@ public class TradeSearchSQLUtil2 {
         for (int i = 0; i < dbNum; i++) {
             for (int j = 0; j < tableNum; j++) {
 
-                String sqlTemp = sql.replaceAll("\\{dbIndex}", StringUtils.leftPad(String.valueOf(i), 2, "0"))
+                String sqlTemp = sql.replaceAll("\\{dbIndex}", StringUtils.leftPad(String.valueOf(i), 1, "0"))
                         .replaceAll("\\{tbIndex}", StringUtils.leftPad(String.valueOf(j), tbBit, "0"));
                 if (i < 4 || i == 8) {
                     out82.write(sqlTemp + "\n");

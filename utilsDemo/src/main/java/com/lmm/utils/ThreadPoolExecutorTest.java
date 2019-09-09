@@ -10,7 +10,9 @@ import java.util.concurrent.TimeUnit;
  * @Date: 2019/3/22
  */
 public class ThreadPoolExecutorTest {
-    
+
+    //private static final ThreadPoolExecutor executors = new ThreadPoolExecutor(10,100,120, TimeUnit.SECONDS, new SynchronousQueue<>());//不阻塞的队列
+
     private static final ThreadPoolExecutor executors = new ThreadPoolExecutor(10,100,120, TimeUnit.SECONDS, new ArrayBlockingQueue<>(20));
     
     public static void main(String[] args) throws IOException {

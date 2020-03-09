@@ -20,8 +20,7 @@ public class TradeOrderSQLUtil1 {
                 "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_PRICED_ORDER_{tbIndex} DROP INDEX IX_BUYER_ID;\n" +
                 "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_PRICED_ORDER_LINE_{tbIndex} DROP INDEX IX_PRICED_ORDER_ID;";
         
-        sql = "CREATE INDEX IX_DRAFT_ORDER_ID_ORDER_STATUS_ID ON XIMA_TRD_{dbIndex}.TRD_ORDER_STATUS_RECORD_{tbIndex} (`DRAFT_ORDER_ID`,`ORDER_STATUS_ID`);\n" +
-                "ALTER TABLE XIMA_TRD_{dbIndex}.TRD_ORDER_STATUS_RECORD_{tbIndex} DROP INDEX IX_DRAFT_ORDER_ID_CREATE_TIME ;";
+        sql = "CREATE TABLE `INTL_TRD_{dbIndex}`.`TRD_PRICED_ORDER_{tbIndex}` LIKE `INTL_TRD_00`.`TRD_PRICED_ORDER_00`;";
         //sql = "UPDATE XIMA_TRD_{dbIndex}.TRD_ORDER_STATUS_RECORD_{tbIndex} SET STATUS_ID=2 WHERE STATUS_ID=4;";
         
         int tableNum = 100;

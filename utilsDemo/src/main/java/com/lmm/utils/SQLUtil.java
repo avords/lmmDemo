@@ -15,7 +15,9 @@ public class SQLUtil {
         String sql = "ALTER TABLE `XIMA_CRD_07`.`CRD_DRAFT_ORDER_%s` MODIFY COLUMN `CLIENT_AGENT` VARCHAR(256) DEFAULT NULL;\n" +
                 "ALTER TABLE `XIMA_CRD_07`.`CRD_DRAFT_ORDER_%s` MODIFY COLUMN `CLIENT_IP`  VARCHAR(256) DEFAULT NULL;\n" +
                 "ALTER TABLE `XIMA_CRD_07`.`CRD_DRAFT_ORDER_%s` MODIFY COLUMN `CLIENT_DEVICE_ID`  VARCHAR(256) DEFAULT NULL;\n";
-        int tableNum = 100;
+        
+        sql = "CREATE TABLE `XIMA_TPN_0`.`TPN_USER_PURCHASE_RECORD_%s` LIKE `XIMA_TPN_0`.`TPN_USER_PURCHASE_RECORD_000`;";
+        int tableNum = 1000;
 
         String path = SQLUtil.class.getResource("/").getPath();
         BufferedWriter out = new BufferedWriter(new FileWriter(path + "buildSQL.sql"));

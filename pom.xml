@@ -62,6 +62,7 @@
         <module>igniteServer</module>
         <module>igniteClient</module>
         <module>distributedLock</module>
+        <module>klHaveMoney</module>
     </modules>
          <!--编译插件配置-->
     <build>

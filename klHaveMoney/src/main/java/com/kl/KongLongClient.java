@@ -10,6 +10,7 @@ import org.springframework.retry.support.RetryTemplate;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -30,13 +31,14 @@ public class KongLongClient {
     private static final RetryTemplate retryTemplate = KongLongRetry.getRetryTemplate();
 
     public static void start() throws Exception {
-        
+
         growUp();//每日增长
-        
+
         lookVideo();//看视频
     }
 
     public static void lookVideo() throws Exception {
+        Random r = new Random();
         InputStream inputStream = KongLongClient.class.getClassLoader().getResourceAsStream("account.txt");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
@@ -58,7 +60,7 @@ public class KongLongClient {
                 int lastVideoAwardNum = retryTemplate.execute(retryContext -> KongLongUtils.lookVideo(token, ip));
                 while (lastVideoAwardNum > 0) {
                     try {
-                        TimeUnit.SECONDS.sleep(30);
+                        TimeUnit.SECONDS.sleep(30 + r.nextInt(10));
                         logger.info("task:{}, token:{}, ip:{}, lastVideoAwardNum:{}", s, token, ip, lastVideoAwardNum);
                     } catch (InterruptedException e) {
                         logger.error("Thread sleep error!", e);
@@ -72,6 +74,7 @@ public class KongLongClient {
             TimeUnit.MILLISECONDS.sleep(1000);
         }
     }
+
     public static void growUp() throws Exception {
         executorGrowUp.execute(() -> {
             String token1 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkZXYiLCJpYXQiOjE1ODYxNDMwMjIsImV4cCI6MTU4ODczNTAyMiwibmJmIjoxNTg2MTQzMDIyLCJ1aWQiOjI1ODcxMDcyfQ.WN6p8yuufpSPmaEBfljGZpN-8i6USqvwvd_AfU5WwfI";

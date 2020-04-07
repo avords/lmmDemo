@@ -160,7 +160,6 @@ public class KongLongUtils {
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(null, headers);
         // 执行HTTP请求
         ResponseEntity<String> response = restTemplate.exchange(serverUrl + "/app/api/v1/task/daySign", HttpMethod.POST, requestEntity, String.class);
-
         ResponseVo responseVo = JSONObject.parseObject(response.getBody(), ResponseVo.class);
 
         if (responseVo.getCode() == 200) {
@@ -169,7 +168,7 @@ public class KongLongUtils {
         throw new RuntimeException("daySign have error");
     }
 
-    public static void syncTime(String token, String ip) {
+    public static int syncTime(String token, String ip) {
         RestTemplate restTemplate = RestTemplateFactory.getRestTemplate();
         restTemplate.getMessageConverters().set(1, new StringHttpMessageConverter(StandardCharsets.UTF_8));
 
@@ -195,6 +194,12 @@ public class KongLongUtils {
         HttpEntity<String> requestEntity = new HttpEntity<>("{}", headers);
         // 执行HTTP请求
         ResponseEntity<String> response = restTemplate.exchange(serverUrl + "/api/v1/home/syncTime", HttpMethod.POST, requestEntity, String.class);
+        ResponseVo responseVo = JSONObject.parseObject(response.getBody(), ResponseVo.class);
+
+        if (responseVo.getCode() == 200) {
+            return 0;
+        }
+        throw new RuntimeException("syncTime have error");
     }
 
     public static void main(String[] args) {

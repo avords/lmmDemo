@@ -33,6 +33,10 @@ public class KongLongClient {
         
         growUp();//每日增长
         
+        lookVideo();//看视频
+    }
+
+    public static void lookVideo() throws Exception {
         InputStream inputStream = KongLongClient.class.getClassLoader().getResourceAsStream("account.txt");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
@@ -68,7 +72,6 @@ public class KongLongClient {
             TimeUnit.MILLISECONDS.sleep(1000);
         }
     }
-
     public static void growUp() throws Exception {
         executorGrowUp.execute(() -> {
             String token1 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkZXYiLCJpYXQiOjE1ODYxNDMwMjIsImV4cCI6MTU4ODczNTAyMiwibmJmIjoxNTg2MTQzMDIyLCJ1aWQiOjI1ODcxMDcyfQ.WN6p8yuufpSPmaEBfljGZpN-8i6USqvwvd_AfU5WwfI";
@@ -102,6 +105,7 @@ public class KongLongClient {
                 } catch (InterruptedException e) {
                     logger.error("syncTime sleep have error", e);
                 }
+                logger.info("sync time success===========================");
             }
         });
     }

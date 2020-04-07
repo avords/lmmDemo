@@ -162,9 +162,12 @@ public class KongLongUtils {
         ResponseEntity<String> response = restTemplate.exchange(serverUrl + "/app/api/v1/task/daySign", HttpMethod.POST, requestEntity, String.class);
         ResponseVo responseVo = JSONObject.parseObject(response.getBody(), ResponseVo.class);
 
-        if (responseVo.getCode() == 200) {
+        if (responseVo.getCode() == 200
+                || responseVo.getCode() == 400) {
             return 0;
         }
+        
+        logger.error("daySign have error, code:{}, msg:{}", responseVo.getCode(), responseVo.getMsg());
         throw new RuntimeException("daySign have error");
     }
 

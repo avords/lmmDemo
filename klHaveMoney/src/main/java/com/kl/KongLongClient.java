@@ -95,6 +95,7 @@ public class KongLongClient {
 
                 try {
                     KongLongUtils.syncTime(token1, ip1);
+                    TimeUnit.MILLISECONDS.sleep(50);
                     KongLongUtils.syncTime(token2, ip2);
                 } catch (Exception e) {
                     logger.error("sync time have error!", e);

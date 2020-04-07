@@ -24,10 +24,15 @@ public class KongLongClient {
     private static final Logger logger = LoggerFactory.getLogger(KongLongClient.class);
 
     private static final ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 10, 120, TimeUnit.SECONDS, new ArrayBlockingQueue<>(300));
+    private static final ThreadPoolExecutor executorGrowUp = new ThreadPoolExecutor(2, 2, 120, TimeUnit.SECONDS, new ArrayBlockingQueue<>(10));
+
     private static final AtomicInteger count = new AtomicInteger(0);
     private static final RetryTemplate retryTemplate = KongLongRetry.getRetryTemplate();
 
-    public static void main(String[] args) throws Exception {
+    public static void start() throws Exception {
+        
+        growUp();//每日增长
+        
         InputStream inputStream = KongLongClient.class.getClassLoader().getResourceAsStream("account.txt");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
@@ -62,5 +67,46 @@ public class KongLongClient {
 
             TimeUnit.MILLISECONDS.sleep(1000);
         }
+    }
+
+    public static void growUp() throws Exception {
+        executorGrowUp.execute(() -> {
+            String token1 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkZXYiLCJpYXQiOjE1ODYxNDMwMjIsImV4cCI6MTU4ODczNTAyMiwibmJmIjoxNTg2MTQzMDIyLCJ1aWQiOjI1ODcxMDcyfQ.WN6p8yuufpSPmaEBfljGZpN-8i6USqvwvd_AfU5WwfI";
+            String token2 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkZXYiLCJpYXQiOjE1ODYxNzAzMzAsImV4cCI6MTU4ODc2MjMzMCwibmJmIjoxNTg2MTcwMzMwLCJ1aWQiOjI2MTgxNTQzfQ.IgZ9EuB3jOCH7Eg2aDO0aN6OHRNfqs5_kNYpJI9D2Dg";
+            String ip1 = IPUtils.generateIP();
+            String ip2 = IPUtils.generateIP();
+
+            try {
+                retryTemplate.execute(retryContext -> KongLongUtils.daySign(token1, ip1));
+            } catch (Exception e) {
+                logger.error("token1 day sign error!", e);
+            }
+
+            try {
+                retryTemplate.execute(retryContext -> KongLongUtils.daySign(token2, ip2));
+            } catch (Exception e) {
+                logger.error("token2 day sign error!", e);
+            }
+
+            for (int i = 0; i < 5 * 60 * 60 / 2; i++) {
+
+                try {
+                    KongLongUtils.syncTime(token1, ip1);
+                    KongLongUtils.syncTime(token2, ip2);
+                } catch (Exception e) {
+                    logger.error("sync time have error!", e);
+                }
+
+                try {
+                    TimeUnit.SECONDS.sleep(2);
+                } catch (InterruptedException e) {
+                    logger.error("syncTime sleep have error", e);
+                }
+            }
+        });
+    }
+
+    public static void main(String[] args) throws Exception {
+        start();
     }
 }

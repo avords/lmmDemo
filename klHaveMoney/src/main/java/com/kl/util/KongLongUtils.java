@@ -133,8 +133,72 @@ public class KongLongUtils {
         return 0;
     }
 
+    public static int daySign(String token, String ip) {
+        RestTemplate restTemplate = RestTemplateFactory.getRestTemplate();
+        restTemplate.getMessageConverters().set(1, new StringHttpMessageConverter(StandardCharsets.UTF_8));
+
+        HttpHeaders headers = new HttpHeaders();
+        //  请勿轻易改变此提交方式，大部分的情况下，提交方式都是表单提交
+        MediaType type = MediaType.parseMediaType("application/x-www-form-urlencoded; charset=UTF-8");
+        headers.setContentType(type);
+
+        //headers.setAccept(Collections.singletonList(MediaType.parseMediaType("text/html;charset=UTF-8")));
+        headers.setAccept(Collections.singletonList(MediaType.ALL));
+        headers.add("Authorization", "Bearer " + token);
+        headers.add("app_type", "0");
+        headers.add("channel", "YYB");
+        headers.add("version", "1.0.51");
+        headers.add("versionCode", "53");
+        headers.add("platform", "android");
+        headers.add("Host", "apiv2.higaoyao.com:9527");
+        headers.add("Connection", "Keep-Alive");
+        headers.add("Accept-Encoding", "gzip");
+        headers.add("User-Agent", "okhttp/3.12.0");
+        headers.add("X-Forwarded-For", ip);
+        headers.add("X-Real-IP", ip);
+
+        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(null, headers);
+        // 执行HTTP请求
+        ResponseEntity<String> response = restTemplate.exchange(serverUrl + "/app/api/v1/task/daySign", HttpMethod.POST, requestEntity, String.class);
+
+        ResponseVo responseVo = JSONObject.parseObject(response.getBody(), ResponseVo.class);
+
+        if (responseVo.getCode() == 200) {
+            return 0;
+        }
+        throw new RuntimeException("daySign have error");
+    }
+
+    public static void syncTime(String token, String ip) {
+        RestTemplate restTemplate = RestTemplateFactory.getRestTemplate();
+        restTemplate.getMessageConverters().set(1, new StringHttpMessageConverter(StandardCharsets.UTF_8));
+
+        HttpHeaders headers = new HttpHeaders();
+        //  请勿轻易改变此提交方式，大部分的情况下，提交方式都是表单提交
+        MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
+        headers.setContentType(type);
+
+        //headers.setAccept(Collections.singletonList(MediaType.parseMediaType("text/html;charset=UTF-8")));
+        headers.setAccept(Collections.singletonList(MediaType.ALL));
+        headers.add("Authorization", "Bearer " + token);
+        headers.add("Content-Length", "15");
+        headers.add("Origin", "http://dragon.higaoyao.com");
+        headers.add("Referer", "http://dragon.higaoyao.com/v80/index.html?version=1.0.51&code=53&platform=android");
+        headers.add("Host", "apiv2.higaoyao.com:9527");
+        headers.add("Accept-Encoding", "gzip, deflate");
+        headers.add("Accept-Language", "zh-CN,en-US;q=0.9");
+        headers.add("User-Agent", "Mozilla/5.0 (Linux; Android 10; BKL-AL20 Build/HUAWEIBKL-AL20; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/66.0.3359.126 MQQBrowser/6.2 TBS/045132 Mobile Safari/537.36");
+        headers.add("X-Requested-With", "com.yiimuu.rich_dinosaur");
+        headers.add("X-Forwarded-For", ip);
+        headers.add("X-Real-IP", ip);
+
+        HttpEntity<String> requestEntity = new HttpEntity<>("{}", headers);
+        // 执行HTTP请求
+        ResponseEntity<String> response = restTemplate.exchange(serverUrl + "/api/v1/home/syncTime", HttpMethod.POST, requestEntity, String.class);
+    }
+
     public static void main(String[] args) {
-        queryBalance("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkZXYiLCJpYXQiOjE1ODMzNDQ3MzMsImV4cCI6MTU4NTkzNjczMywibmJmIjoxNTgzMzQ0NzMzLCJ1aWQiOjI0MzQ2MTg2fQ.ez3eKb49HFLwjAVvO78zkGgQswWUfYLVVd8sWvC3OIk", IPUtils.generateIP());
-        lookVideo("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkZXYiLCJpYXQiOjE1ODMzNDQ3MzMsImV4cCI6MTU4NTkzNjczMywibmJmIjoxNTgzMzQ0NzMzLCJ1aWQiOjI0MzQ2MTg2fQ.ez3eKb49HFLwjAVvO78zkGgQswWUfYLVVd8sWvC3OIk", IPUtils.generateIP());
+        daySign("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkZXYiLCJpYXQiOjE1ODYxNzAzMzAsImV4cCI6MTU4ODc2MjMzMCwibmJmIjoxNTg2MTcwMzMwLCJ1aWQiOjI2MTgxNTQzfQ.IgZ9EuB3jOCH7Eg2aDO0aN6OHRNfqs5_kNYpJI9D2Dg", IPUtils.generateIP());
+        syncTime("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkZXYiLCJpYXQiOjE1ODYxNzAzMzAsImV4cCI6MTU4ODc2MjMzMCwibmJmIjoxNTg2MTcwMzMwLCJ1aWQiOjI2MTgxNTQzfQ.IgZ9EuB3jOCH7Eg2aDO0aN6OHRNfqs5_kNYpJI9D2Dg", IPUtils.generateIP());
     }
 }

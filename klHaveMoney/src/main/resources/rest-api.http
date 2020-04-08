@@ -1,3 +1,13 @@
+# curl -H 'Host: m.test.ximalaya.com' -H 'Cookie: 4&_device=android&6ba08d7b-2af7-35c9-b0f6-8e615bcb0308&6.6.66;4&_token=201000&5183B9B69A61762E2923D4BAD7EBCDEDcDvFD2925EB99776D04552DA99067FA66A50ADD822EE40A798CCEAA723DC15AAF58;channel=and-f5;impl=com.ximalaya.ting.android;osversion=26;device_model=LLD-AL10;XUM=7IkUkJHU;XIM=315fc790481eb;c-oper=%E6%9C%AA%E7%9F%A5;net-mode=WIFI;freeFlowType=0;res=1080%2C2032;NSUP=;AID=G5dQPUoVrGM=;manufacturer=HUAWEI;XD=NKjp788S5Gr4FVTfPfWS5hMxSz65Om1OOU7Zo066fvVTRO+0E2jgnnSTc4Ggj7YWrlCMH4kUj9OAiOpsIcb6xNbJRil1ZozpHS1Ud8l7iWwKi59CmoZp2xYkLO2RjbqRQm6baYlKpN4fYp3PZa7LKSWBs8ESU2v/S7yoQwuz8Zs=;umid=1ba77572fc85ba6693d6e3f86be659a6;xm_grade=0;minorProtectionStatus=0;oaid=7b7fc7f7-f6ff-4cb4-def9-e9ffbe1afd41;domain=.ximalaya.com;path=/;' -H 'cookie2: $version=1' -H 'accept: */*' -H 'user-agent: ting_6.6.66(LLD-AL10,Android26)' --compressed 'https://m.test.ximalaya.com/trade/order/all'
+GET https://m.test.ximalaya.com/trade/order/all
+Host: m.test.ximalaya.com
+Cookie: 4&_device=android&6ba08d7b-2af7-35c9-b0f6-8e615bcb0308&6.6.66;4&_token=201000&5183B9B69A61762E2923D4BAD7EBCDEDcDvFD2925EB99776D04552DA99067FA66A50ADD822EE40A798CCEAA723DC15AAF58;channel=and-f5;impl=com.ximalaya.ting.android;osversion=26;device_model=LLD-AL10;XUM=7IkUkJHU;XIM=315fc790481eb;c-oper=%E6%9C%AA%E7%9F%A5;net-mode=WIFI;freeFlowType=0;res=1080%2C2032;NSUP=;AID=G5dQPUoVrGM=;manufacturer=HUAWEI;XD=NKjp788S5Gr4FVTfPfWS5hMxSz65Om1OOU7Zo066fvVTRO+0E2jgnnSTc4Ggj7YWrlCMH4kUj9OAiOpsIcb6xNbJRil1ZozpHS1Ud8l7iWwKi59CmoZp2xYkLO2RjbqRQm6baYlKpN4fYp3PZa7LKSWBs8ESU2v/S7yoQwuz8Zs=;umid=1ba77572fc85ba6693d6e3f86be659a6;xm_grade=0;minorProtectionStatus=0;oaid=7b7fc7f7-f6ff-4cb4-def9-e9ffbe1afd41;domain=.ximalaya.com;path=/;
+cookie2: $version=1
+accept: */*
+user-agent: ting_6.6.66(LLD-AL10,Android26)
+
+###
+
 POST {{host}}/app/api/v1/push/taskEnd
 Accept: */*
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkZXYiLCJpYXQiOjE1ODYxNDMwMjIsImV4cCI6MTU4ODczNTAyMiwibmJmIjoxNTg2MTQzMDIyLCJ1aWQiOjI1ODcxMDcyfQ.WN6p8yuufpSPmaEBfljGZpN-8i6USqvwvd_AfU5WwfI

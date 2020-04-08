@@ -7,4 +7,22 @@ ed=gytwVZo5sVX9UDMUEDnZ6iLerk2cNDpY4%2BEOeLDi9aRIdb3yIJHgP4R97iXKamGTESeh2iGA5n0
 
 <> 2020-04-08T104431.200.json
 ###
+POST http://m.test.ximalaya.com/trade/placeorder/v2
+Accept: application/json
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+Cookie: _xmLog=xm_1537427065234_jma8dnrmla4728; login_from=phone; _ga=GA1.2.1987318396.1537495010; NTKF_T2D_CLIENTID=guest0E446093-99E3-DC3C-11EF-51C17350ED3F; account=185****5186; nickname=1855186dyml; 1&remember_me=y; 1&_token=108478605&C2C4BDF5A7AA4876A45F689D4CBCFEE6NdVDEE5D60A396D835FF6041BCA1F95258F0AC381ED5F5D4EE7AD325376544D3830; Hm_lvt_5490b26e083b046c80fbd58f64c1da45=1569829871; 6&remember_me=y; 6&_token=203715&6F7DB627A025414EAD2B0F1259F947E5NdVE09D744AD654ED1210451652B57E8EF0DCED08D18007A56958AADD81866F7854; trackType=web; teambition_private_sid=eyJhdXRoVXBkYXRlZCI6MTUyNjM2NjY1MzAzMCwibG9naW5Gcm9tIjoidGVhbWJpdGlvbiIsInVpZCI6IjVhZmE4MWJkZDI1NDU3MDAwMWIyMWU5ZSIsInVzZXIiOnsiX2lkIjoiNWFmYTgxYmRkMjU0NTcwMDAxYjIxZTllIiwibmFtZSI6IumXq+WGrOWFqCIsImVtYWlsIjoiYXJuby55YW5AeGltYWxheWEuY29tIiwiYXZhdGFyVXJsIjoiaHR0cHM6Ly9zdHJpa2VyLnRlYW1iaXRpb24ubmV0L3RodW1ibmFpbC8xMTE1MDE1ZDk3ZTY1NDdjYmFhZTE5ZWFlMGJkM2U0NWRjOWEvdy8xMDAvaC8xMDAiLCJyZWdpb24iOiJjbiIsImxhbmciOiIiLCJpc1JvYm90IjpmYWxzZSwib3BlbklkIjoiIiwicGhvbmVGb3JMb2dpbiI6IiJ9fQ==; teambition_private_sid.sig=qtrYQue7NXLfVUMI3TDdCAmEdIA; referral=%7B%22domain%22%3A%22teambition.ximalaya.com%22%2C%22path%22%3A%22%2Flogin%22%2C%22query%22%3A%22%22%2C%22hash%22%3A%22%22%7D; Hm_lvt_e2abff7f9ca8c2fa2da3ef27e36bbc27=1581989518,1584513013; 4&remember_me=y; Hm_lpvt_e2abff7f9ca8c2fa2da3ef27e36bbc27=1584519613; 4&_token=204539&2121C93658504301A8A4A9417F05CB72NdV615D206E8B3F712240B4716622E291AABC62D3CA4CA8923CC7A00F21AE2EBC21; 4_l_flag=204539&2121C93658504301A8A4A9417F05CB72NdV615D206E8B3F712240B4716622E291AABC62D3CA4CA8923CC7A00F21AE2EBC21_2020-04-0316:30:38; login_type=code_mobile; sensorsdata2015jssdkcross=%7B%22distinct_id%22%3A%2217153e0f73533b-0438bb9b7fba96-396f7f00-2073600-17153e0f73648%22%2C%22%24device_id%22%3A%2217153e0f73533b-0438bb9b7fba96-396f7f00-2073600-17153e0f73648%22%2C%22props%22%3A%7B%22%24latest_traffic_source_type%22%3A%22%E7%9B%B4%E6%8E%A5%E6%B5%81%E9%87%8F%22%2C%22%24latest_referrer%22%3A%22%22%2C%22%24latest_referrer_host%22%3A%22%22%2C%22%24latest_search_keyword%22%3A%22%E6%9C%AA%E5%8F%96%E5%88%B0%E5%80%BC_%E7%9B%B4%E6%8E%A5%E6%89%93%E5%BC%80%22%7D%7D; Hm_lvt_4a7d8ec50cfd6af753c4f8aee3425070=1586314070; Hm_lpvt_4a7d8ec50cfd6af753c4f8aee3425070=1586314070; x_xmly_traffic=utm_source%3A%26utm_medium%3A%26utm_campaign%3A%26utm_content%3A%26utm_term%3A%26utm_from%3A
+Host: m.test.ximalaya.com
+Origin: http://m.test.ximalaya.com
+Pragma: no-cache
+Referer: http://m.test.ximalaya.com/trade/prepareorder?domain=1&businessTypeId=1250&orderItems=1030700100000120832:1&context=%7B%22refundable%22%3Atrue%2C%22orderTypeId%22%3A2%7D&returnUrl=http%253A%252F%252Fm.test.ximalaya.com%252F45996%252Falbum%252F120740%253F1525659369977
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36
+X-Requested-With: XMLHttpRequest
+
+domain=1&businessTypeId=1250&orderItems=1030700100000120832%3A1&context=%7B%22deviceTypeId%22%3A300%2C%22h5_vip_nest%22%3Atrue%2C%22sourceType%22%3A%22PC%22%2C%22ip%22%3A%22192.168.120.127%22%2C%22orderTypeId%22%3A2%2C%22refundable%22%3Atrue%2C%22secretVersion%22%3A%221.0.1%22%7D&couponId=&voucherId=&promoCode=&userContactId=381590&userInvoiceId=&comment=&returnUrl=http%253A%252F%252Fm.test.ximalaya.com%252F45996%252Falbum%252F120740%253F1525659369977&promotionItems=
+<> 2020-04-08T104431.200.json
+###
 

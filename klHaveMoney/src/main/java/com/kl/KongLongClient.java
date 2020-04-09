@@ -38,6 +38,7 @@ public class KongLongClient {
     }
 
     public static void lookVideo() throws Exception {
+        count.set(0);
         Random r = new Random();
         InputStream inputStream = KongLongClient.class.getClassLoader().getResourceAsStream("account.txt");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));

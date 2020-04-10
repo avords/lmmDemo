@@ -1,0 +1,73 @@
+@startuml
+participant order
+participant workflow
+participant fulfillment
+participant 业务方
+
+alt
+order --> fulfillment:接收支付成功的消息
+activate order
+deactivate order
+
+activate fulfillment
+fulfillment -> fulfillment:履约主单落库
+activate fulfillment
+deactivate fulfillment
+fulfillment --> fulfillment:异步执行
+activate fulfillment
+    alt
+    fulfillment -> fulfillment:主单拆分
+    activate fulfillment
+    deactivate fulfillment
+    
+    fulfillment -> fulfillment:子单落库
+    activate fulfillment
+    deactivate fulfillment
+    
+    fulfillment -> fulfillment:子单激活
+    activate fulfillment
+    fulfillment --> 业务方:履约
+    deactivate fulfillment
+    fulfillment -> fulfillment:主单激活
+    activate fulfillment
+    deactivate fulfillment
+    end
+deactivate fulfillment
+deactivate fulfillment
+end
+
+alt
+业务方 -> fulfillment:确认履约
+activate 业务方
+activate fulfillment
+
+fulfillment -> fulfillment:确认子单
+activate fulfillment
+deactivate fulfillment
+fulfillment --> 业务方:确认履约 response
+deactivate 业务方
+
+fulfillment --> fulfillment:异步执行
+activate fulfillment
+fulfillment -> fulfillment:设置主单为部分履约
+activate fulfillment
+deactivate fulfillment
+
+fulfillment -> fulfillment:检查主单是否全部履约
+activate fulfillment
+deactivate fulfillment
+
+fulfillment -> fulfillment:确认主单
+activate fulfillment
+fulfillment-->workflow:已履约
+activate workflow
+workflow -> order:交易成功
+activate order
+order-->workflow:交易成功response
+deactivate order
+deactivate workflow
+deactivate fulfillment
+
+deactivate fulfillment
+end
+@enduml

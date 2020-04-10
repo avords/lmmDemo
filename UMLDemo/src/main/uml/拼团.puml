@@ -1,4 +1,6 @@
 @startuml
+title 延时履约(拼团)
+autonumber
 participant order
 participant workflow
 participant fulfillment

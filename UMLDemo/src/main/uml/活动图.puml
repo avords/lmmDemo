@@ -1,0 +1,11 @@
+@startuml
+start 
+:Hello word;
+:this is on defined on;
+if(成功) then
+:是的;
+else
+:不是的;
+endif
+:花花;
+@enduml

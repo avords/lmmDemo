@@ -1,4 +1,6 @@
 @startuml
+title 延时履约(买赠)
+autonumber
 participant order
 participant workflow
 participant fulfillment
@@ -37,6 +39,10 @@ deactivate fulfillment
 fulfillment -> fulfillment:履约子订单激活
 activate fulfillment
 fulfillment --> 业务方:履约
+note right
+自有业务同步调用rpc接口，
+外围业务发消息进行履约
+end note
 deactivate fulfillment
 
 fulfillment -> fulfillment:主单激活

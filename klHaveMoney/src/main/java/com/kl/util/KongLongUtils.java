@@ -76,9 +76,8 @@ public class KongLongUtils {
         //headers.setAccept(Collections.singletonList(MediaType.parseMediaType("text/html;charset=UTF-8")));
         headers.setAccept(Collections.singletonList(MediaType.ALL));
         headers.add("Authorization", "Bearer " + token);
-        headers.add("Content-Length", "15");
         headers.add("Origin", "http://dragon.higaoyao.com");
-        headers.add("Referer", "http://dragon.higaoyao.com/v80/index.html?version=1.0.51&code=53&platform=android");
+        headers.add("Referer", "http://dragon.higaoyao.com/v80/index.html?version=1.1.1&code=61&platform=android");
         headers.add("Host", "apiv2.higaoyao.com:9527");
         headers.add("Accept-Encoding", "gzip, deflate");
         headers.add("Accept-Language", "zh-CN,en-US;q=0.9");

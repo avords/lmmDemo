@@ -6,7 +6,7 @@ package com.kl.quartz;
  */
 public class QuartzKongLong {
     public static void main(String[] args) {
-        QuartzManager.addJob("konglongJob", KongLongJob.class, "0 0 7 * * ?");//不支持任务并发，实现StatefulJob接口
+        QuartzManager.addJob("konglongJob", KongLongJob.class, "0 0 15 * * ?");//不支持任务并发，实现StatefulJob接口
         QuartzManager.startJobs();
     }
 }

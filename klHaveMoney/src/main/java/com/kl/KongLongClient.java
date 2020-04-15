@@ -24,7 +24,7 @@ public class KongLongClient {
 
     private static final Logger logger = LoggerFactory.getLogger(KongLongClient.class);
 
-    private static final ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 10, 120, TimeUnit.SECONDS, new ArrayBlockingQueue<>(300));
+    private static final ThreadPoolExecutor executor = new ThreadPoolExecutor(70, 70, 120, TimeUnit.SECONDS, new ArrayBlockingQueue<>(300));
     private static final ThreadPoolExecutor executorGrowUp = new ThreadPoolExecutor(2, 2, 120, TimeUnit.SECONDS, new ArrayBlockingQueue<>(10));
 
     private static final AtomicInteger count = new AtomicInteger(0);

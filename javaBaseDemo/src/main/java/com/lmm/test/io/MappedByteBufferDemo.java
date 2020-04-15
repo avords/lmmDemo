@@ -1,4 +1,4 @@
-package com.lmm.test.serialize;
+package com.lmm.test.io;
 
 
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.nio.channels.FileChannel;
 /**
  * Created by arno.yan on 2018/9/19.
  */
-public class Demo {
+public class MappedByteBufferDemo {
 
     public static void main(String[] args) throws IOException {
         //user.setAge(26);

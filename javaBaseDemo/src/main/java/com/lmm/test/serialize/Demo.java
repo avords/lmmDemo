@@ -1,9 +1,8 @@
 package com.lmm.test.serialize;
 
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 
@@ -14,10 +13,11 @@ public class Demo {
 
     public static void main(String[] args) throws IOException {
         //user.setAge(26);
-        File file = new File("/Users/xmly/test.txt");
-        FileInputStream fos = new FileInputStream(file);
+        RandomAccessFile raf = new RandomAccessFile("/Users/xmly/test.txt", "rw");
+        FileChannel fileChannel = raf.getChannel();
+        
         MappedByteBuffer mappedByteBuffer =
-                fos.getChannel().map(FileChannel.MapMode.READ_ONLY, 0, file.length());
+                fileChannel.map(FileChannel.MapMode.READ_WRITE, 0, raf.length());
 
         byte[] s = new byte[mappedByteBuffer.capacity()];
         mappedByteBuffer.get(s);
@@ -26,6 +26,10 @@ public class Demo {
             s[mappedByteBuffer.position()-1] = b;
         }*/
         System.out.println(new String(s));
-        fos.close();
+        
+        mappedByteBuffer.flip();
+        mappedByteBuffer.put("你是".getBytes());
+        raf.close();
+        fileChannel.close();
     }
 }

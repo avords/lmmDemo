@@ -9,7 +9,7 @@ import java.io.FileWriter;
  * @author: arno.yan
  * @Date: 2019/3/26
  */
-public class FulfillOrderSQLUtil1 {
+public class FulfillOrderSQLUtil {
     public static void main(String[] args) throws Exception {
 
         String sql = "CREATE INDEX IX_BUYER_ID_DOMAIN ON XIMA_TRD_{dbIndex}.TRD_DRAFT_ORDER_{tbIndex} (`BUYER_ID`,`DOMAIN`);\n" +

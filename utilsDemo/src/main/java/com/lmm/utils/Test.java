@@ -1,8 +1,7 @@
 package com.lmm.utils;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -11,13 +10,21 @@ import java.util.List;
  */
 public class Test {
     public static void main(String[] args) {
-        String str = "380920170908436198,342020170912260199,393220170804495238,310120170908436025,351920170804498618,380220170908533048,360520170820136026,380920170908436168,371520170908485241,391120170810971844,23420170604876843,370820170820133290,380220170908435299,351420170814434291,353220170810955139,391720170814433781,382320170804502291,21020170908524290,362720170814457032,360220170814437451,362720170909462910,382720170810946076,363420170810952980,362820170908435085,353020170810970803,342520170820135856,1620170814437628,21220170814429825,333020170810958671,371520170908485232,362720170814417292,341820170820124639,351920170804498595,360120170814424960,320120170816565246,381520170909465641,362820170909456858,342320170804488659,21220170814429838,380920170908436220,381820170810946067,372820170908427090,380020170908522522,21220170602287655,340220170820080328,313420170804488958";
-        List<Long> list = new ArrayList<>();
-        for (String s : str.split(",")) {
-            String ss = s.substring(0,s.length()-6) + "000000";
-            list.add(Long.parseLong(ss));
-        }
+        List<Long> list1 = new ArrayList<>(10000000);
+        LinkedList<Long> list2 = new LinkedList<>();
 
-        System.out.println(StringUtils.join(list, ","));
+        long time3 = System.currentTimeMillis();
+        for (long i = 0; i < 10000000; i++) {
+            list2.addFirst(i);
+        }
+        long time4 = System.currentTimeMillis();
+        System.out.println("LinkedList:"+(time4-time3));
+        
+        long time1 = System.currentTimeMillis();
+        for (long i = 0; i < 10000000; i++) {
+            list1.add(0,i);
+        }
+        long time2 = System.currentTimeMillis();
+        System.out.println("ArrayList:"+(time2-time1));
     }
 }

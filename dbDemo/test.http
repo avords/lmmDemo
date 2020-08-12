@@ -1,0 +1,7 @@
+POST http://m.test.ximalaya.com/contact/userContact
+Content-Type: application/x-www-form-urlencoded
+Cookie: 4&_token=320697&42402B8C8683429F950E89D135AA6E81NdV6162526EF8A2B0E765C103BA0B7EF35BA49A417D4F9DAC24C060108B8CBF0108
+
+contactName=测试426&contactPhone=13812312383&areaCode=110101&addressLine=测试地址&defaultAddress=false
+
+###

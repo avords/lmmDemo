@@ -1,4 +1,4 @@
-package com.lmm.jdk8.demo;
+package com.lmm.easy.excel.demo;
 
 import com.alibaba.excel.EasyExcelFactory;
 import com.alibaba.excel.ExcelWriter;
@@ -23,9 +23,9 @@ public class ExcelDemo1 {
 
     public static void main(String[] args) {
         // 读取 excel 表格的路径
-        String test1 = "/Users/xmly/test1.xlsx";
-        String test2 = "/Users/xmly/test2.xlsx";
-        String test3 = "/Users/xmly/test4.xlsx";
+        String test1 = PathUtils.getRootPath() + "test1.xlsx";
+        String test2 = PathUtils.getRootPath() + "test2.xlsx";
+        String test3 = PathUtils.getRootPath() + "test4.xlsx";
 
 
         try {

@@ -64,6 +64,7 @@
         <module>distributedLock</module>
         <module>klHaveMoney</module>
         <module>UMLDemo</module>
+        <module>easyexcelDemo</module>
     </modules>
          <!--编译插件配置-->
     <build>

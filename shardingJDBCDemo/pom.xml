@@ -134,7 +134,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.26</version>
+            <version>8.0.16</version>
         </dependency>
         <!--sharding jdbc-->
         <!-- 引入sharding-jdbc核心模块 -->

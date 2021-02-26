@@ -58,7 +58,7 @@ public class WriteDemo {
                         return;
                     }
                     CellRangeAddress cellRangeAddress = new CellRangeAddress(row.getRowNum(), row.getRowNum(),
-                            0, 3);
+                            0, 3);//0到3列合并为一个单元格
                     writeSheetHolder.getSheet().addMergedRegionUnsafe(cellRangeAddress);
                 }
             };

@@ -3,6 +3,8 @@ package com.lmm.jdk8.demo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Random;
+
 /**
  * Created by arno.yan on 2018/11/6.
  */
@@ -37,6 +39,9 @@ public class Test {
     private static final Logger logger = LoggerFactory.getLogger(Test.class);
 
     public static void main(String[] args) {
-        System.out.println(String.class.getName());
+        Random random = new Random();
+        for (int i = 0; i < 10000; i++) {
+            System.out.println(random.nextInt(10000000));
+        }
     }
 }
